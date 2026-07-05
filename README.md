@@ -51,13 +51,16 @@ Fund mehr Sinn ergab.
   Exaggerated, Social Satire, Digital, Portrait, Sculpture, Anime/Manga, Celebrity, Live,
   Editorial, Cartoon Caricature.
 
-### Eigene KI-Generierung (5 Bilder, `images/hz-*`)
+### Eigene KI-Generierungen (9 Bilder, `images/bs-*` und `images/hz-*`)
 
-**Hafenstadt-Entwürfe** - keine externe Quelle, sondern eigene Bildgenerierung (Higgsfield /
-nano_banana_pro, image-to-image) für das Barbara-Sailer-Website-Projekt. Ausgangspunkt war die
-Häuserszene im Vordergrund eines Magritte-Ölgemälde-Stil-Referenzbilds, als eigenständiges
-Motiv weitergebaut: Straße mit Häuserzeile, Kirche, Hafenmauer, Steg, Freilichtbühne mit
-Weinrot-Vorhang.
+Keine externe Quelle, sondern eigene Bildgenerierungen (Higgsfield / nano_banana_pro) aus der
+Stil-Findung für das Barbara-Sailer-Website-Projekt:
+
+- **Stilrichtungen** (`bs-*`, 4 Bilder) - vier erprobte Richtungen: Aquarell-Hero,
+  dunkle Bühnenfotografie-Hero, Tusche-Illustration (Chor + Ablauf-Sektion).
+- **Hafenstadt-Entwürfe** (`hz-*`, 5 Bilder) - Häuserszene im Vordergrund eines
+  Magritte-Ölgemälde-Stil-Referenzbilds, als eigenständiges Motiv weitergebaut: Straße mit
+  Häuserzeile, Kirche, Hafenmauer, Steg, Freilichtbühne mit Weinrot-Vorhang.
 
 ## Bewusst ausgelassen
 
@@ -81,6 +84,7 @@ kurzer Beschreibung). Bei mehreren Beispielbildern für denselben Stilnamen: meh
 ## Rechte
 
 Rechte an den einzelnen Bildern liegen bei den jeweiligen Urhebern/Publikationen bzw.
-Rechteinhabern der gezeigten Figuren/Marken (Ausnahme: die Hafenstadt-Entwürfe sind eigene
-KI-Generierungen). Diese Sammlung dient rein privaten Recherche-/Moodboard-Zwecken
-(Ideenfindung für eigene Bildgenerierungen) und ist kein eigenständiges kreatives Werk.
+Rechteinhabern der gezeigten Figuren/Marken (Ausnahme: die eigenen KI-Generierungen unter
+`images/bs-*` und `images/hz-*`). Diese Sammlung dient rein privaten Recherche-/
+Moodboard-Zwecken (Ideenfindung für eigene Bildgenerierungen) und ist kein eigenständiges
+kreatives Werk.
