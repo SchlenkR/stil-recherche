@@ -51,7 +51,7 @@ Fund mehr Sinn ergab.
   Exaggerated, Social Satire, Digital, Portrait, Sculpture, Anime/Manga, Celebrity, Live,
   Editorial, Cartoon Caricature.
 
-### Eigene KI-Generierungen (23 Bilder, `images/bs-*` und `images/hz-*`)
+### Eigene KI-Generierungen (31 Bilder, `images/bs-*` und `images/hz-*`)
 
 Keine externe Quelle, sondern eigene Bildgenerierungen (Higgsfield / nano_banana_pro) aus der
 Stil-Findung für das Barbara-Sailer-Website-Projekt:
@@ -77,6 +77,17 @@ Stil-Findung für das Barbara-Sailer-Website-Projekt:
   stehende Gruppe, `bs-22` gehend mit rennenden Kindern und Opa/Oma mit Gehstock.
 - **Stilvariante: flächige Grautöne** (`bs-23`) - dieselbe Kirche mit reduzierter Strichzahl,
   Schattierung über flächige Grautöne (besonders am Baum) statt dichter Kreuzschraffur.
+- **Gesichtstest-Reihe** (`bs-24` bis `bs-29`) - auf Basis von `bs-23`, Suche nach dem richtigen
+  Grad an Gesichtsdetail: erst drei minimalistische Varianten (ultra-minimal, warm-minimal, mit
+  Augenbrauen), dann drei Varianten Richtung Karikatur - kantig statt knuffig/knubbelig
+  (eckig-dezent, eckig-editorial, eckig-moderat). `bs-28` (eckig-editorial) wurde als beste
+  Balance aus Ausdruck und Komposition gewählt.
+- **Gruppenszene: Kirche + Familie, kantig-karikaturhaft** (`bs-30`, `bs-31`) - die ganze Familie
+  (Mann, Frau, Opa, Oma, Junge, Mädchen) im Gesichtsstil von `bs-28`, konsistent über alle
+  Altersstufen. Technisch gelöst über zwei gleichzeitige Referenzbilder (Kirchen-Stil aus `bs-23`
+  + Gesichtsstil aus `bs-28`) - eine erste Version mit nur `bs-23` als Referenz fiel bei
+  Erwachsenen und Kindern wieder zurück in einen weichen, niedlichen Stil. `bs-30` stehende
+  Gruppe, `bs-31` gehend mit rennenden Kindern.
 - **Hafenstadt-Entwürfe** (`hz-*`, 5 Bilder) - Häuserszene im Vordergrund eines
   Magritte-Ölgemälde-Stil-Referenzbilds, als eigenständiges Motiv weitergebaut: Straße mit
   Häuserzeile, Kirche, Hafenmauer, Steg, Freilichtbühne mit Weinrot-Vorhang.
