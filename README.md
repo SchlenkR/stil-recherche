@@ -51,7 +51,7 @@ Fund mehr Sinn ergab.
   Exaggerated, Social Satire, Digital, Portrait, Sculpture, Anime/Manga, Celebrity, Live,
   Editorial, Cartoon Caricature.
 
-### Eigene KI-Generierungen (25 Bilder, `images/bs-*` und `images/hz-*`)
+### Eigene KI-Generierungen (23 Bilder, `images/bs-*` und `images/hz-*`)
 
 Keine externe Quelle, sondern eigene Bildgenerierungen (Higgsfield / nano_banana_pro) aus der
 Stil-Findung für das Barbara-Sailer-Website-Projekt:
@@ -69,12 +69,14 @@ Stil-Findung für das Barbara-Sailer-Website-Projekt:
   Karikatur-Übertreibung. Als Stilreferenz diente eine der Kirche-only-Generierungen
   (ohne Personen), damit keine Körperproportionen aus dem ursprünglichen Chor-Bild
   übernommen werden.
-- **Gruppenszene: Kirche + Familie** (`bs-16` bis `bs-20`) - Feedback war, dass die
-  Einzelcharaktere zu fotorealistisch mit Tusche-Filter wirkten. Fünf neue Versuche derselben
-  Szene (Kirche + Mann, Frau, Opa, Oma, Junge, Mädchen zusammen), die den Stilisierungsgrad
-  variieren: gemäßigte Fashion-Illustration (echte Gesichter statt abstrakter
-  Fashion-Sketch-Gesichter), Editorial-Illustration, loser Tuschestrich, klassische
-  Buchillustration, und reduzierte Silhouette mit Detailgesicht als Kontrast.
+- **Gruppenszene: Kirche + Familie, abstrakt angedeutet** (`bs-21`, `bs-22`) - nach mehreren
+  verworfenen Versuchen (Einzelcharaktere wirkten zu fotorealistisch, eine Fashion-Illustration-
+  Elongation wirkte "seelenlos") die funktionierende Lösung: Kirche unverändert im Original-Stil
+  als Referenzbild, Personen bewusst klein, nur mit wenigen Strichen angedeutet und mit einem
+  leichten Hauch von Gesicht (nicht komplett blank, aber auch nicht detailliert) - `bs-21`
+  stehende Gruppe, `bs-22` gehend mit rennenden Kindern und Opa/Oma mit Gehstock.
+- **Stilvariante: flächige Grautöne** (`bs-23`) - dieselbe Kirche mit reduzierter Strichzahl,
+  Schattierung über flächige Grautöne (besonders am Baum) statt dichter Kreuzschraffur.
 - **Hafenstadt-Entwürfe** (`hz-*`, 5 Bilder) - Häuserszene im Vordergrund eines
   Magritte-Ölgemälde-Stil-Referenzbilds, als eigenständiges Motiv weitergebaut: Straße mit
   Häuserzeile, Kirche, Hafenmauer, Steg, Freilichtbühne mit Weinrot-Vorhang.
