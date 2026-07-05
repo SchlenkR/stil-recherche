@@ -51,7 +51,7 @@ Fund mehr Sinn ergab.
   Exaggerated, Social Satire, Digital, Portrait, Sculpture, Anime/Manga, Celebrity, Live,
   Editorial, Cartoon Caricature.
 
-### Eigene KI-Generierungen (20 Bilder, `images/bs-*` und `images/hz-*`)
+### Eigene KI-Generierungen (25 Bilder, `images/bs-*` und `images/hz-*`)
 
 Keine externe Quelle, sondern eigene Bildgenerierungen (Higgsfield / nano_banana_pro) aus der
 Stil-Findung für das Barbara-Sailer-Website-Projekt:
@@ -69,6 +69,12 @@ Stil-Findung für das Barbara-Sailer-Website-Projekt:
   Karikatur-Übertreibung. Als Stilreferenz diente eine der Kirche-only-Generierungen
   (ohne Personen), damit keine Körperproportionen aus dem ursprünglichen Chor-Bild
   übernommen werden.
+- **Gruppenszene: Kirche + Familie** (`bs-16` bis `bs-20`) - Feedback war, dass die
+  Einzelcharaktere zu fotorealistisch mit Tusche-Filter wirkten. Fünf neue Versuche derselben
+  Szene (Kirche + Mann, Frau, Opa, Oma, Junge, Mädchen zusammen), die den Stilisierungsgrad
+  variieren: gemäßigte Fashion-Illustration (echte Gesichter statt abstrakter
+  Fashion-Sketch-Gesichter), Editorial-Illustration, loser Tuschestrich, klassische
+  Buchillustration, und reduzierte Silhouette mit Detailgesicht als Kontrast.
 - **Hafenstadt-Entwürfe** (`hz-*`, 5 Bilder) - Häuserszene im Vordergrund eines
   Magritte-Ölgemälde-Stil-Referenzbilds, als eigenständiges Motiv weitergebaut: Straße mit
   Häuserzeile, Kirche, Hafenmauer, Steg, Freilichtbühne mit Weinrot-Vorhang.

@@ -187,8 +187,8 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-    max-width: min(1100px, 92vw);
-    max-height: 90vh;
+    width: min(1100px, 92vw);
+    height: 90vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -241,12 +241,14 @@
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    overflow: auto;
+    overflow: hidden;
     background: var(--bg);
+    flex: 1 1 auto;
+    min-height: 0;
   }
   .lightbox-image-wrap img {
-    max-width: 100%;
-    max-height: calc(90vh - 5.5rem);
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     display: block;
     border-radius: 4px;
@@ -2198,6 +2200,51 @@
           <div class="style-name">Charakter: kleiner Junge</div>
           <div class="desc">Kleiner Junge, ruhig und gefasst stehend, Ganzfigur statt Halbfigur.</div>
           <div class="filename">bs-15-charakter-junge.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/bs-16-gruppe-fashion-gemaessigt.png" alt="Gruppenszene Kirche und Familie, gemäßigte Fashion-Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Gruppe + Kirche: Fashion-Illustration gemäßigt</div>
+          <div class="desc">Alle sechs Charaktere plus Kirche in einer Szene - leicht elongierte, elegante Fashion-Illustration-Proportionen, aber mit echten, detaillierten Gesichtern statt abstrakter Fashion-Sketch-Gesichter.</div>
+          <div class="filename">bs-16-gruppe-fashion-gemaessigt.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/bs-17-gruppe-editorial.png" alt="Gruppenszene Kirche und Familie, Editorial-Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Gruppe + Kirche: Editorial-Illustration</div>
+          <div class="desc">Natürliche Proportionen, selbstbewusste Haltung, ausdrucksstarke Gesichter im Fokus - elegant und würdevoll statt comichaft.</div>
+          <div class="filename">bs-17-gruppe-editorial.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/bs-18-gruppe-loser-strich.png" alt="Gruppenszene Kirche und Familie, loser Tuschestrich" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Gruppe + Kirche: loser Strich</div>
+          <div class="desc">Fließendere, luftigere Linienführung mit weniger dichter Kreuzschraffur, Gesichter bleiben klar erkennbar und individuell.</div>
+          <div class="filename">bs-18-gruppe-loser-strich.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/bs-19-gruppe-storybook.png" alt="Gruppenszene Kirche und Familie, klassische Buchillustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Gruppe + Kirche: klassische Buchillustration</div>
+          <div class="desc">Vintage-Buchillustrations-Eleganz, warm und würdevoll, sanfte Idealisierung ohne Comic-Übertreibung.</div>
+          <div class="filename">bs-19-gruppe-storybook.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/bs-20-gruppe-silhouette.png" alt="Gruppenszene Kirche und Familie, Silhouette mit Detailgesicht" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Gruppe + Kirche: Silhouette + Detailgesicht</div>
+          <div class="desc">Körper/Kleidung als reduzierte, stilisierte Silhouette, Gesicht als einziges fein durchgezeichnetes Detail - starker Kontrast.</div>
+          <div class="filename">bs-20-gruppe-silhouette.png</div>
         </div>
       </div>
 
