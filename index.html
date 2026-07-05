@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Stil-Recherche</title>
+<title>Stil-Recherche 2026 - Übersicht</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   :root {
@@ -28,81 +28,2306 @@
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    padding: 3rem 1.5rem;
+    padding: 2rem 1.5rem 4rem;
     background: var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     line-height: 1.45;
   }
-  main {
-    max-width: 900px;
-    margin: 0 auto;
+  header {
+    max-width: 1680px;
+    margin: 0 auto 2.5rem;
   }
   h1 {
-    font-size: 1.8rem;
-    margin: 0 0 0.5rem;
+    font-size: 1.7rem;
+    margin: 0 0 0.4rem;
   }
-  main > p {
+  header p {
     color: var(--text-muted);
-    max-width: 65ch;
+    max-width: 70ch;
+    margin: 0.3rem 0;
   }
-  .cards {
+  main {
+    max-width: 1680px;
+    margin: 0 auto;
+  }
+  section.source {
+    margin-bottom: 3rem;
+  }
+  section.source h2 {
+    font-size: 1.25rem;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.3rem;
+  }
+  section.source .source-meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+  }
+  section.source .source-meta a {
+    color: var(--link);
+  }
+  .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.2rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.1rem;
   }
-  .cards a {
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .card .thumb {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .card .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
+    cursor: zoom-in;
+  }
+  .card .body {
+    padding: 0.8rem 0.9rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    flex: 1;
+  }
+  .card .style-name {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .card .desc {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    flex: 1;
+  }
+  .card .filename {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .trend-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+  .trend-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem 1.1rem;
+  }
+  .trend-block .style-name {
+    font-weight: 600;
+    font-size: 1.02rem;
+    margin-bottom: 0.3rem;
+  }
+  .trend-block .desc {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-bottom: 0.8rem;
+    max-width: 90ch;
+  }
+  .trend-thumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .trend-thumbs .t {
+    width: 150px;
+    aspect-ratio: 4 / 3;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--border);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .trend-thumbs .t img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+  }
+  footer {
+    max-width: 1680px;
+    margin: 2rem auto 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 11, 13, 0.82);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .lightbox.open {
+    display: flex;
+  }
+  .lightbox-panel {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 1.4rem 1.5rem;
-    text-decoration: none;
-    color: var(--text);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    max-width: min(1100px, 92vw);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
-  .cards a:hover {
+  .lightbox-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.6rem 0.7rem 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .lightbox-caption {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lightbox-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+  .lightbox-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.85rem;
+    border-radius: 7px;
+    padding: 0.4rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lightbox-btn:hover {
     border-color: var(--accent);
   }
-  .cards h2 {
-    margin: 0 0 0.4rem;
-    font-size: 1.15rem;
+  .lightbox-btn.close {
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0.4rem 0.6rem;
   }
-  .cards p {
-    margin: 0;
-    color: var(--text-muted);
-    font-size: 0.9rem;
+  .lightbox-image-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow: auto;
+    background: var(--bg);
   }
-  footer {
-    max-width: 900px;
-    margin: 2.5rem auto 0;
-    color: var(--text-muted);
+  .lightbox-image-wrap img {
+    max-width: 100%;
+    max-height: calc(90vh - 5.5rem);
+    object-fit: contain;
+    display: block;
+    border-radius: 4px;
+  }
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: none;
+    background: rgba(20, 21, 24, 0.55);
+    color: #fff;
+    font-size: 1.8rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  .lightbox-nav:hover {
+    background: var(--accent);
+  }
+  .lightbox-nav.prev {
+    left: 1rem;
+  }
+  .lightbox-nav.next {
+    right: 1rem;
+  }
+  .reject-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(15, 16, 18, 0.6);
+    color: #fff;
+    font-size: 0.75rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity 0.15s, background 0.15s;
+    z-index: 2;
+    padding: 0;
+  }
+  .thumb:hover .reject-btn,
+  .t:hover .reject-btn {
+    opacity: 0.95;
+  }
+  .reject-btn.active {
+    background: var(--accent);
+    opacity: 1;
+  }
+  .card.rejected .thumb img,
+  .t.rejected img {
+    opacity: 0.2;
+  }
+  .card.rejected .body {
+    opacity: 0.2;
+  }
+  .reject-summary {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 0.8rem;
     font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .reject-summary button {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.82rem;
+    border-radius: 6px;
+    padding: 0.35rem 0.65rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .reject-summary button:hover {
+    border-color: var(--accent);
   }
 </style>
 </head>
 <body>
-<main>
-  <h1>Stil-Recherche</h1>
-  <p>Zwei Sammlungen von Design-/Illustrationsstilen aus externen Trend-Artikeln, als
-  Ideen-Fundus für neue Bildgenerierungen.</p>
 
-  <div class="cards">
-    <a href="stil-recherche-web/">
-      <h2>Design-Trends nach Quelle</h2>
-      <p>187 Bilder aus 11 Webseiten - Illustration, Grafikdesign, Webdesign, Logo/Branding,
-      Typografie, Verpackung, 3D-Art. Gruppiert nach Quell-Webseite.</p>
-    </a>
-    <a href="stil-recherche-zeichenstile/">
-      <h2>Zeichenstile</h2>
-      <p>62 Bilder - Illustrations-Grundstile, Cartoon-/Animationsstile nach Figur/Serie,
-      Karikatur-Künstler und Karikatur-Genres. Gruppiert nach Stil statt nach Quelle.</p>
-    </a>
+<header>
+  <h1>Stil-Recherche</h1>
+  <p>Fundus an Illustrations-, Grafikdesign-, Webdesign- und Zeichenstilen aus verschiedenen Trend-Artikeln, als Ideen-Ausgangspunkt, um daraus neue Bilder zu bauen ("wir nehmen mal den und den Stil"). Die ersten Abschnitte sind nach Quell-Webseite gruppiert (mehrere Quellen zeigen unterschiedliche Trends), die späteren Abschnitte nach Zeichenstil (weil viele Quellen dieselben Stile zeigen). Klick auf ein Bild vergrößert es, das kleine ✕ oben rechts markiert ein Bild als "nicht verwenden" (wird dann fast transparent, dauerhaft im Browser gemerkt), ←/→ blättert durch alle Bilder der ganzen Seite.</p>
+  <div class="reject-summary">
+    <span id="rejectCount">0 Bilder aussortiert</span>
+    <button type="button" id="exportRejectedBtn">Liste exportieren</button>
+    <button type="button" id="resetRejectedBtn">Zurücksetzen</button>
   </div>
+</header>
+
+<main>
+
+
+  <section class="source">
+    <h2>Illustrations-Stile</h2>
+    <p class="source-meta">Quelle: <a href="https://getillustrations.com/blog/emerging-illustration-styles-to-watch-in-2026/" target="_blank" rel="noopener">getillustrations.com - "Emerging Illustration Styles to Watch in 2026"</a></p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-01-post-ai-authenticity.jpg" alt="Post-AI Authenticity" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Post-AI Authenticity</div>
+          <div class="desc">Gegenreaktion auf die Flut an KI-Bildern: bewusst rohe, unperfekte, persönliche Kunst, oft im Zine-Look mit expressiven Linien.</div>
+          <div class="filename">gi-01-post-ai-authenticity.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-02-neo-traditionalism.webp" alt="Neo-Traditionalism" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Neo-Traditionalism</div>
+          <div class="desc">Rückkehr zu analogen Medien - Tinte, Aquarell, Bleistift - gemischt mit digitalen Finishes, roh und handgemacht wirkend.</div>
+          <div class="filename">gi-02-neo-traditionalism.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-03-ai-human-collaboration.gif" alt="AI-Human Collaboration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">AI-Human Collaboration</div>
+          <div class="desc">KI verschwindet nicht, sie wird Werkzeug im Workflow - Illustratoren nutzen Midjourney/DALL-E als Ausgangspunkt, nicht als Ersatz.</div>
+          <div class="filename">gi-03-ai-human-collaboration.gif</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-04-3d-meets-flat-design.webp" alt="3D Meets Flat Design" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">3D Meets Flat Design</div>
+          <div class="desc">Grenze zwischen 2D-Illustration und 3D-Modellierung verschwimmt - stilisierte kleine 3D-Szenerien wie Miniaturstädte.</div>
+          <div class="filename">gi-04-3d-meets-flat-design.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-05-3d-meets-flat-design-b.jpg" alt="3D Meets Flat Design - isometrisch" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">3D Meets Flat Design (isometrisch)</div>
+          <div class="desc">Variante desselben Trends: isometrische Illustration, flache Farbflächen mit 3D-Perspektive kombiniert.</div>
+          <div class="filename">gi-05-3d-meets-flat-design-b.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-06-eco-visualism.png" alt="Eco-Visualism & Climate Motifs" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Eco-Visualism &amp; Climate Motifs</div>
+          <div class="desc">Klimawandel als prägender Stil-Einfluss - nachhaltigkeitsthematische Illustration, Ökologie-Symbolik.</div>
+          <div class="filename">gi-06-eco-visualism.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-07-eco-visualism-b.webp" alt="Eco-Visualism - Packaging" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Eco-Visualism (Packaging)</div>
+          <div class="desc">Symbolische Klima-Visuals wie "warming stripes" auf Verpackungsdesign übertragen.</div>
+          <div class="filename">gi-07-eco-visualism-b.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-08-bold-minimalism.webp" alt="Bold Minimalism" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Maximum Minimalism / Bold Minimalism</div>
+          <div class="desc">Streamlined, reduzierte Flächen, aber mit kräftigem Farbakzent statt Zurückhaltung - Klarheit mit Präsenz.</div>
+          <div class="filename">gi-08-bold-minimalism.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-09-bold-minimalism-b.png" alt="Bold Minimalism Poster" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Bold Minimalism (Poster)</div>
+          <div class="desc">Eine zarte Illustration gepaart mit einem einzigen Neon-/Signalfarb-Akzent vor viel Weißraum.</div>
+          <div class="filename">gi-09-bold-minimalism-b.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-10-grainy-textures-halftone.png" alt="Grainy Textures - Halftone" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Grainy Textures (Halbton)</div>
+          <div class="desc">Rasterpunkte/Halbton-Optik als tastbare, unperfekte Textur gegen die digitale Hochglanz-Glätte.</div>
+          <div class="filename">gi-10-grainy-textures-halftone.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-11-grainy-textures-handdrawn.png" alt="Grainy Textures - Hand Drawn" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Grainy Textures (Hand-made)</div>
+          <div class="desc">Simulierte Filmkorn- und Scan-Papier-Optik, auch bei digital erstellten Illustrationen, für ein wärmeres Gefühl.</div>
+          <div class="filename">gi-11-grainy-textures-handdrawn.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-12-retro-revival.png" alt="Retro Revival" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Retro Revival, Punk &amp; Typografie-Innovation</div>
+          <div class="desc">70er/80er-Nostalgie, Gothic-/Serifenschriften, handgekritzeltes Punk-Lettering und Collage-Elemente.</div>
+          <div class="filename">gi-12-retro-revival.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-13-motion-illustrations.gif" alt="Motion Illustrations" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Motion Illustrations &amp; Seamless Loops</div>
+          <div class="desc">Statische Bilder weichen kurzen, endlos loopenden Mikro-Animationen fürs Social-Feed.</div>
+          <div class="filename">gi-13-motion-illustrations.gif</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-14-maximalist-psychedelia.webp" alt="Maximalist Psychedelia" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Maximalist Psychedelia</div>
+          <div class="desc">Gegenpol zum Minimalismus: hyper-farbig, verspielt-surreal, im Geist der 70er-Psychedelic-Plakate.</div>
+          <div class="filename">gi-14-maximalist-psychedelia.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-15-nature-centric.gif" alt="Nature-Centric" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Nature-Centric &amp; Organic Materials</div>
+          <div class="desc">Erdige Paletten, organische Formen und Materialität statt platter Symbolik - Natur als Grundstimmung.</div>
+          <div class="filename">gi-15-nature-centric.gif</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/gi-16-abstract-colour-fields.webp" alt="Abstract Colour Fields" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Abstract Colour Fields &amp; Bold Palettes</div>
+          <div class="desc">Kräftige, gesättigte Farbflächen im Stil kaleidoskopischer Gemälde (a la Lynne Drexler).</div>
+          <div class="filename">gi-16-abstract-colour-fields.webp</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Grafikdesign-Trends</h2>
+    <p class="source-meta">Quelle: <a href="https://digitalsynopsis.com/design/graphic-design-trends-2026/" target="_blank" rel="noopener">digitalsynopsis.com - "Top 20 Graphic Design Trends For 2026"</a> (alle Beispielbilder je Trend, nicht nur eines)</p>
+    <div class="trend-list">
+      <div class="trend-block">
+        <div class="style-name">AI-Generated Design</div>
+        <div class="desc">KI als generativer Kollaborateur zum Explorieren, nicht als Shortcut - überraschende Kompositionen, von Hand verfeinert.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-01-ai-generated-design.webp" alt="AI-generated design example with surreal composition and unexpected visual textures" loading="lazy"></div>
+          <div class="t"><img src="images/ds-01-ai-generated-design-2.webp" alt="AI-assisted graphic design exploring abstract forms, color transitions, and layered detail" loading="lazy"></div>
+          <div class="t"><img src="images/ds-01-ai-generated-design-3.webp" alt="AI-generated visual concept refined with human art direction and balanced typography" loading="lazy"></div>
+          <div class="t"><img src="images/ds-01-ai-generated-design-4.webp" alt="Experimental AI-generated artwork with organic shapes, patterning, and textured depth" loading="lazy"></div>
+          <div class="t"><img src="images/ds-01-ai-generated-design-5.webp" alt="AI-generated design study featuring bold form exploration and cinematic lighting effects" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">3D Design &amp; Animation</div>
+        <div class="desc">3D-Elemente zurückhaltend statt spektakulär eingesetzt - für Tiefe und räumliche Logik in Markensystemen.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-02-3d-design-animation.webp" alt="Three-dimensional graphic design example showing stylised 3D forms integrated into a brand visual system" loading="lazy"></div>
+          <div class="t"><img src="images/ds-02-3d-design-animation-2.webp" alt="3D graphic design composition using depth, lighting, and soft geometry for visual impact" loading="lazy"></div>
+          <div class="t"><img src="images/ds-02-3d-design-animation-3.webp" alt="Expressive 3D design element combined with typography and layout for digital branding" loading="lazy"></div>
+          <div class="t"><img src="images/ds-02-3d-design-animation-4.webp" alt="Minimal yet immersive 3D graphic design featuring sculptural forms and spatial depth" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Liquid &amp; Experimental Typography</div>
+        <div class="desc">Buchstabenformen wirken elastisch, dehnen und verformen sich, deuten Bewegung an - auch in stehenden Bildern.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-03-liquid-typography.webp" alt="Liquid typography design featuring flowing letterforms and soft, fluid shapes" loading="lazy"></div>
+          <div class="t"><img src="images/ds-03-liquid-typography-2.webp" alt="Experimental liquid typography with elastic letterforms suggesting motion and fluidity" loading="lazy"></div>
+          <div class="t"><img src="images/ds-03-liquid-typography-3.webp" alt="Fluid typographic composition where letters stretch and blend into organic forms" loading="lazy"></div>
+          <div class="t"><img src="images/ds-03-liquid-typography-4.webp" alt="Display typography experiment using liquid shapes and soft transitions" loading="lazy"></div>
+          <div class="t"><img src="images/ds-03-liquid-typography-5.webp" alt="Expressive liquid typography design emphasizing movement, texture, and emotion" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Bento Grid Layouts</div>
+        <div class="desc">Inhalte in modulare, ausbalancierte Kacheln unterteilt - strukturiert, aber nicht starr.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-04-bento-grid.webp" alt="Bento grid layout design organising content into clean, modular sections" loading="lazy"></div>
+          <div class="t"><img src="images/ds-04-bento-grid-2.webp" alt="Modular bento grid layout used in digital interface and visual design" loading="lazy"></div>
+          <div class="t"><img src="images/ds-04-bento-grid-3.webp" alt="Bento-style grid composition balancing imagery, typography, and spacing" loading="lazy"></div>
+          <div class="t"><img src="images/ds-04-bento-grid-4.webp" alt="Structured bento grid layout creating clarity and hierarchy in design" loading="lazy"></div>
+          <div class="t"><img src="images/ds-04-bento-grid-5.webp" alt="Modern bento grid layout showcasing modular design and visual order" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Motion-Led Branding</div>
+        <div class="desc">Bewegung ist fester Bestandteil der Markenidentität - Logos und Typografie von Anfang an mit Animation gedacht.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-05-motion-led-branding.webp" alt="Motion-led branding example showing animated visual identity and dynamic graphic elements" loading="lazy"></div>
+          <div class="t"><img src="images/ds-05-motion-led-branding-2.webp" alt="Brand identity system designed with motion as a core visual component" loading="lazy"></div>
+          <div class="t"><img src="images/ds-05-motion-led-branding-3.webp" alt="Animated typography and graphic system used in motion-led branding" loading="lazy"></div>
+          <div class="t"><img src="images/ds-05-motion-led-branding-4.webp" alt="Minimal motion graphics applied to branding for rhythm and visual presence" loading="lazy"></div>
+          <div class="t"><img src="images/ds-05-motion-led-branding-5.webp" alt="Motion-driven brand visuals combining animation, typography, and graphic elements" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Mixed-Media Design</div>
+        <div class="desc">Fotografie, Illustration, Typografie und Textur nebeneinander in einer Komposition - dicht und dimensional.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-06-mixed-media.webp" alt="Mixed-media graphic design combining photography, illustration, typography, and textured layers" loading="lazy"></div>
+          <div class="t"><img src="images/ds-06-mixed-media-2.webp" alt="Layered mixed-media composition blending visual textures, imagery, and graphic elements" loading="lazy"></div>
+          <div class="t"><img src="images/ds-06-mixed-media-3.webp" alt="Experimental mixed-media design using collage techniques and typographic overlays" loading="lazy"></div>
+          <div class="t"><img src="images/ds-06-mixed-media-4.webp" alt="Mixed-media visual system layering photography, graphic shapes, and textures" loading="lazy"></div>
+          <div class="t"><img src="images/ds-06-mixed-media-5.webp" alt="Contemporary mixed-media artwork showcasing depth through layered graphic elements" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Ink Trap Fonts</div>
+        <div class="desc">Ursprünglich eine Druck-Notwendigkeit, jetzt bewusst übertrieben als stilistisches Detail in der Typografie.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-07-ink-trap-fonts.webp" alt="Ink trap typography design showcasing engineered letterforms with intentional cut-ins" loading="lazy"></div>
+          <div class="t"><img src="images/ds-07-ink-trap-fonts-2.webp" alt="Modern ink trap font used in bold typographic composition and layout design" loading="lazy"></div>
+          <div class="t"><img src="images/ds-07-ink-trap-fonts-3.webp" alt="Experimental ink trap typography highlighting rhythmic letter details and visual contrast" loading="lazy"></div>
+          <div class="t"><img src="images/ds-07-ink-trap-fonts-4.webp" alt="Ink trap type design applied to branding with engineered yet expressive letterforms" loading="lazy"></div>
+          <div class="t"><img src="images/ds-07-ink-trap-fonts-5.webp" alt="Contemporary ink trap font design balancing function and expressive typography" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Nature-Inspired Design</div>
+        <div class="desc">Organische Formen, gedämpfte Paletten, spürbare Texturen - geerdet statt dekorativ.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-08-nature-inspired.webp" alt="Nature-inspired graphic design using organic shapes, earthy colors, and tactile textures" loading="lazy"></div>
+          <div class="t"><img src="images/ds-08-nature-inspired-2.webp" alt="Organic graphic design composition influenced by natural forms and muted color palettes" loading="lazy"></div>
+          <div class="t"><img src="images/ds-08-nature-inspired-3.webp" alt="Nature-led visual design focusing on materiality, texture, and atmospheric balance" loading="lazy"></div>
+          <div class="t"><img src="images/ds-08-nature-inspired-4.webp" alt="Graphic design inspired by natural elements with soft forms and restrained symbolism" loading="lazy"></div>
+          <div class="t"><img src="images/ds-08-nature-inspired-5.webp" alt="Grounded nature-inspired branding using organic shapes and tactile visual language" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Neo-Brutalism</div>
+        <div class="desc">Rohe Layouts, überdimensionierte Typografie, bewusste Reibung - konfrontativ, aber selbstbewusst.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-09-neo-brutalism.webp" alt="Neo-brutalist graphic design featuring raw layout, bold typography, and high contrast" loading="lazy"></div>
+          <div class="t"><img src="images/ds-09-neo-brutalism-2.webp" alt="Bold neo-brutalist design using oversized type, rigid structure, and visual tension" loading="lazy"></div>
+          <div class="t"><img src="images/ds-09-neo-brutalism-3.webp" alt="Neo-brutalist visual identity prioritising clarity, impact, and unrefined aesthetics" loading="lazy"></div>
+          <div class="t"><img src="images/ds-09-neo-brutalism-4.webp" alt="Raw neo-brutalist layout design with confrontational typography and minimal ornamentation" loading="lazy"></div>
+          <div class="t"><img src="images/ds-09-neo-brutalism-5.webp" alt="Confident neo-brutalist graphic design emphasising structure, hierarchy, and impact" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Utilitarian Design</div>
+        <div class="desc">Funktion bestimmt Form - beeinflusst von Beschilderungssystemen und Industriegrafik, klar und hierarchisch.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-10-utilitarian-design.webp" alt="Utilitarian graphic design focused on clarity, hierarchy, and functional typography" loading="lazy"></div>
+          <div class="t"><img src="images/ds-10-utilitarian-design-2.webp" alt="Functional design system inspired by signage, wayfinding, and industrial graphics" loading="lazy"></div>
+          <div class="t"><img src="images/ds-10-utilitarian-design-3.webp" alt="Minimal utilitarian layout prioritising legibility, structure, and information flow" loading="lazy"></div>
+          <div class="t"><img src="images/ds-10-utilitarian-design-4.webp" alt="Bold utilitarian graphic design using grids, labels, and clear visual hierarchy" loading="lazy"></div>
+          <div class="t"><img src="images/ds-10-utilitarian-design-5.webp" alt="Industrial-inspired utilitarian design emphasising function over decoration" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Pixel Art Revival</div>
+        <div class="desc">Pixel-Raster als kreatives Konstruktionssystem statt reiner Nostalgie - verspielt, aber kontrolliert.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-11-pixel-art-revival.webp" alt="Pixel art inspired graphic design using grids as a creative system" loading="lazy"></div>
+          <div class="t"><img src="images/ds-11-pixel-art-revival-2.webp" alt="Modern pixel-based visual identity blending nostalgia with contemporary design" loading="lazy"></div>
+          <div class="t"><img src="images/ds-11-pixel-art-revival-3.webp" alt="Playful pixel art composition used as a modular branding element" loading="lazy"></div>
+          <div class="t"><img src="images/ds-11-pixel-art-revival-4.webp" alt="Pixel grid typography and illustration reflecting digital culture aesthetics" loading="lazy"></div>
+          <div class="t"><img src="images/ds-11-pixel-art-revival-5.webp" alt="Contemporary pixel art design used for branding and visual systems" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Glitch Effects</div>
+        <div class="desc">Verzerrung gezielt statt zufällig eingesetzt - deutet digitale Störung, Übergang oder Spannung an.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-12-glitch-effects.webp" alt="Glitch effect graphic design using controlled distortion and digital interference" loading="lazy"></div>
+          <div class="t"><img src="images/ds-12-glitch-effects-2.webp" alt="Intentional glitch design applied to typography and visual composition" loading="lazy"></div>
+          <div class="t"><img src="images/ds-12-glitch-effects-3.webp" alt="Experimental glitch aesthetic creating visual tension through distortion and noise" loading="lazy"></div>
+          <div class="t"><img src="images/ds-12-glitch-effects-4.webp" alt="Digital glitch visual style used to suggest disruption and transition" loading="lazy"></div>
+          <div class="t"><img src="images/ds-12-glitch-effects-5.webp" alt="Subtle glitch effect design adding texture and emotional tension to visuals" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Bold Minimalism</div>
+        <div class="desc">Starke Farbentscheidungen, selbstbewusste Typografie, hoher Kontrast statt Zurückhaltung - klar und unübersehbar.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-13-bold-minimalism.webp" alt="Bold minimalist graphic design using strong color blocks and confident typography" loading="lazy"></div>
+          <div class="t"><img src="images/ds-13-bold-minimalism-2.webp" alt="Minimalist design with high contrast and assertive typographic hierarchy" loading="lazy"></div>
+          <div class="t"><img src="images/ds-13-bold-minimalism-3.webp" alt="Confident minimalist layout combining simplicity with strong visual presence" loading="lazy"></div>
+          <div class="t"><img src="images/ds-13-bold-minimalism-4.webp" alt="Bold minimal graphic system using limited elements and striking composition" loading="lazy"></div>
+          <div class="t"><img src="images/ds-13-bold-minimalism-5.webp" alt="Minimalist design approach emphasising clarity, contrast, and visual confidence" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Quirky Illustrations</div>
+        <div class="desc">Handgezeichnete Formen, übertriebene Proportionen, verspielte Kompositionen - als emotionaler Anker.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-14-quirky-illustrations.webp" alt="Quirky illustration style featuring hand-drawn characters and playful visual elements" loading="lazy"></div>
+          <div class="t"><img src="images/ds-14-quirky-illustrations-2.webp" alt="Expressive quirky illustration with exaggerated forms and informal line work" loading="lazy"></div>
+          <div class="t"><img src="images/ds-14-quirky-illustrations-3.webp" alt="Playful illustration design embracing imperfection and character-driven visuals" loading="lazy"></div>
+          <div class="t"><img src="images/ds-14-quirky-illustrations-4.webp" alt="Hand-drawn quirky illustration used as a warm and expressive design element" loading="lazy"></div>
+          <div class="t"><img src="images/ds-14-quirky-illustrations-5.webp" alt="Characterful illustration style adding personality and emotional tone to design" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Photos in Custom Shapes</div>
+        <div class="desc">Fotografie verlässt das Rechteck - individuelle Zuschnitte und Rahmen machen das Bild zum aktiven Layout-Element.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-15-photos-custom-shapes.webp" alt="Photography framed within custom geometric shapes as part of a graphic design layout" loading="lazy"></div>
+          <div class="t"><img src="images/ds-15-photos-custom-shapes-2.webp" alt="Photograph cropped into an unconventional shape to create visual rhythm in design" loading="lazy"></div>
+          <div class="t"><img src="images/ds-15-photos-custom-shapes-3.webp" alt="Editorial design using photography placed inside decorative custom frames" loading="lazy"></div>
+          <div class="t"><img src="images/ds-15-photos-custom-shapes-4.webp" alt="Creative layout where photography becomes an integrated design element through custom cropping" loading="lazy"></div>
+          <div class="t"><img src="images/ds-15-photos-custom-shapes-5.webp" alt="Modern graphic design showcasing images placed in non-rectangular custom shapes" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Handmade &amp; Collage Aesthetics</div>
+        <div class="desc">Geschnittenes Papier, geschichtete Texturen, sichtbare Unregelmäßigkeiten - als Antwort auf digitale Ermüdung.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-16-handmade-collage.webp" alt="Handmade collage design using cut paper textures and layered elements" loading="lazy"></div>
+          <div class="t"><img src="images/ds-16-handmade-collage-2.webp" alt="Graphic design collage combining tactile materials, illustration, and typography" loading="lazy"></div>
+          <div class="t"><img src="images/ds-16-handmade-collage-3.webp" alt="Expressive collage artwork with visible imperfections and layered paper effects" loading="lazy"></div>
+          <div class="t"><img src="images/ds-16-handmade-collage-4.webp" alt="Mixed-media collage design featuring hand-cut shapes and textured backgrounds" loading="lazy"></div>
+          <div class="t"><img src="images/ds-16-handmade-collage-5.webp" alt="Contemporary collage graphic design with analog textures and experimental layering" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Gradients &amp; Blends</div>
+        <div class="desc">Farbverläufe als Stimmungsmacher statt reiner Dekoration - weiche Übergänge statt harter Kontraste.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-17-gradients-blends.webp" alt="Soft gradient design with smooth color transitions and blended tones" loading="lazy"></div>
+          <div class="t"><img src="images/ds-17-gradients-blends-2.webp" alt="Abstract gradient composition featuring chromatic blends and fluid color shifts" loading="lazy"></div>
+          <div class="t"><img src="images/ds-17-gradients-blends-3.webp" alt="Modern graphic design using layered gradients and atmospheric color fades" loading="lazy"></div>
+          <div class="t"><img src="images/ds-17-gradients-blends-4.webp" alt="Minimal graphic layout enhanced with subtle gradient blends and tonal depth" loading="lazy"></div>
+          <div class="t"><img src="images/ds-17-gradients-blends-5.webp" alt="Expressive gradient design creating mood through smooth color transitions" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Retro-Futurism</div>
+        <div class="desc">Vergangene Zukunftsvisionen - Chrom-Oberflächen, Neon-Paletten, Sci-Fi-Referenzen mit heutiger Präzision umgesetzt.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-18-retro-futurism.webp" alt="Retro futurism graphic design with chrome textures and futuristic typography" loading="lazy"></div>
+          <div class="t"><img src="images/ds-18-retro-futurism-2.webp" alt="Futuristic design inspired by retro sci fi aesthetics and neon color palettes" loading="lazy"></div>
+          <div class="t"><img src="images/ds-18-retro-futurism-3.webp" alt="Graphic composition blending vintage futurism with modern digital styling" loading="lazy"></div>
+          <div class="t"><img src="images/ds-18-retro-futurism-4.webp" alt="Retro futurist visual design featuring bold typography and futuristic motifs" loading="lazy"></div>
+          <div class="t"><img src="images/ds-18-retro-futurism-5.webp" alt="Stylised retro futurism artwork combining nostalgia with speculative future themes" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Maximalism</div>
+        <div class="desc">Visuelle Dichte durch geschichtete Typografie, Farbe, Bild und Textur - laut, aber mit Struktur darunter.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-19-maximalism.webp" alt="Maximalist graphic design with layered typography, bold colors, and dense compositions" loading="lazy"></div>
+          <div class="t"><img src="images/ds-19-maximalism-2.webp" alt="Expressive maximalist design featuring vibrant palettes, mixed visuals, and rich textures" loading="lazy"></div>
+          <div class="t"><img src="images/ds-19-maximalism-3.webp" alt="Contemporary maximalism in graphic design using layered imagery and bold visual hierarchy" loading="lazy"></div>
+          <div class="t"><img src="images/ds-19-maximalism-4.webp" alt="Maximalist visual identity design with dense layouts, typography, and color contrasts" loading="lazy"></div>
+          <div class="t"><img src="images/ds-19-maximalism-5.webp" alt="Bold maximalist graphic composition balancing visual excess with structured design systems" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="trend-block">
+        <div class="style-name">Blur &amp; Distortion</div>
+        <div class="desc">Unschärfe und Verzerrung bewusst für Stimmung und Textur eingesetzt - Atmosphäre statt scharfer Präzision.</div>
+        <div class="trend-thumbs">
+          <div class="t"><img src="images/ds-20-blur-distortion.webp" alt="Graphic design using blur effects and soft distortion to create mood and atmosphere" loading="lazy"></div>
+          <div class="t"><img src="images/ds-20-blur-distortion-2.webp" alt="Abstract graphic design featuring intentional blur, smudged edges, and visual noise" loading="lazy"></div>
+          <div class="t"><img src="images/ds-20-blur-distortion-3.webp" alt="Experimental graphic design with distorted typography and atmospheric blur effects" loading="lazy"></div>
+          <div class="t"><img src="images/ds-20-blur-distortion-4.webp" alt="Contemporary design composition using blur and distortion to add texture and emotion" loading="lazy"></div>
+          <div class="t"><img src="images/ds-20-blur-distortion-5.webp" alt="Modern graphic design embracing soft focus, distortion, and visual ambiguity" loading="lazy"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Webdesign-Trends</h2>
+    <p class="source-meta">Quelle: <a href="https://fireart.studio/blog/the-best-web-design-trends/" target="_blank" rel="noopener">fireart.studio - "Web Design Trends 2026: Tactile Brutalism &amp; Invisible Architecture"</a></p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/fa-01-tactile-brutalism.jpg" alt="Tactile Brutalism" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Tactile Brutalism</div>
+          <div class="desc">Löst die weiche Neumorphism-Optik ab: scharfe 0px-Geometrie, hoher Kontrast, harte 1px-Kanten statt Schatten und runde Ecken.</div>
+          <div class="filename">fa-01-tactile-brutalism.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/fa-02-chromatic-extremes-css-textures.jpg" alt="Chromatic Extremes & CSS Textures" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Chromatic Extremes &amp; CSS-Texturen</div>
+          <div class="desc">Rohe Geometrie kombiniert mit aggressiven Farbpaletten statt der gedämpften Töne der letzten Jahre.</div>
+          <div class="filename">fa-02-chromatic-extremes-css-textures.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/fa-03-typography-as-architecture.jpg" alt="Typography as Primary Architecture" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Typography as Primary Architecture</div>
+          <div class="desc">Text wird von der Unterstützung für Fotos/Illustrationen zur primären Interface-Struktur - redaktionell und bildstark.</div>
+          <div class="filename">fa-03-typography-as-architecture.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/fa-04-bento-grid-paradox.jpg" alt="Bento Grid Paradox" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Bento Grid Paradox</div>
+          <div class="desc">Modulare Kachel-Layouts, um dichte Dashboards und Portfolios in übersichtliche Quadranten zu gliedern.</div>
+          <div class="filename">fa-04-bento-grid-paradox.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/fa-05-machine-experience-mx.png" alt="Machine Experience (MX) & Sustainable UX" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Machine Experience (MX) &amp; Sustainable UX</div>
+          <div class="desc">Unsichtbare Design-Entscheidungen im Code selbst - optimiert für digitale Nachhaltigkeit und KI-lesbare Strukturen.</div>
+          <div class="filename">fa-05-machine-experience-mx.png</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Logo- &amp; Branding-Trends</h2>
+    <p class="source-meta">Quelle: <a href="https://digitalsynopsis.com/design/logo-design-trends-2026/" target="_blank" rel="noopener">digitalsynopsis.com - "Top 10 Logo Design Trends For 2026"</a></p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/lg-01-gothic-heritage.jpg" alt="Story driven gothic and heritage typography" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Gothic &amp; Heritage-Typografie</div>
+          <div class="desc">Logos, die Struktur und Gewicht gotischer Buchstabenformen und historischer Referenzen leihen - keine wörtliche Mittelalter-Kopie, sondern Verwurzelung und Selbstbewusstsein.</div>
+          <div class="filename">lg-01-gothic-heritage.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lg-02-pixel-sharp.jpg" alt="Pixel sharp precision" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Pixel Sharp Precision</div>
+          <div class="desc">Rasterbasierte, ultra-scharfe Logos für digitale Kompetenz und technische Klarheit - stark bei SaaS/Tech/Data-Marken.</div>
+          <div class="filename">lg-02-pixel-sharp.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lg-03-micro-details.jpg" alt="Micro details as identity anchors" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Micro Details als Identitäts-Anker</div>
+          <div class="desc">Kleine visuelle Störungen - eine Kerbe, ein Punkt, ein Versatz - als Signatur-Element, das sich einprägt, ohne das Logo zu überladen.</div>
+          <div class="filename">lg-03-micro-details.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lg-04-warm-organic.jpg" alt="Warm organic logos" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Warm Organic Logos</div>
+          <div class="desc">Weiche Kurven, erdige Paletten, zugängliche Formen statt steriler Corporate-Marken - menschlich und emotional nahbar.</div>
+          <div class="filename">lg-04-warm-organic.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lg-05-stamp-seal.jpg" alt="Stamp and seal identities" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Stamp &amp; Seal Identities</div>
+          <div class="desc">Runde Embleme und Siegel-Logos als Symbol für Vertrauen und Offizialität - anpassungsfähig für Luxus-Packaging bis Social Media.</div>
+          <div class="filename">lg-05-stamp-seal.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lg-06-morphing-adaptive.jpg" alt="Morphing and adaptive logos" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Morphing &amp; Adaptive Logos</div>
+          <div class="desc">Dynamische Marken, die Form/Komposition je nach Kontext verändern - ein System aus Varianten statt eines starren Einzel-Logos.</div>
+          <div class="filename">lg-06-morphing-adaptive.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lg-07-handdrawn-mascots.jpg" alt="Hand drawn mascots and symbols" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Hand-Drawn Mascots &amp; Symbols</div>
+          <div class="desc">Unperfekte, skizzenhafte Charaktere bringen Persönlichkeit zurück - persönlicher und einprägsamer als KI-glatte Visuals.</div>
+          <div class="filename">lg-07-handdrawn-mascots.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lg-08-minimalism-twist.jpg" alt="Minimalism with a twist" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Minimalism with a Twist</div>
+          <div class="desc">Cleane Logos bleiben relevant, bekommen aber ein unerwartetes Element - asymmetrischer Abstand oder verspielte Typografie.</div>
+          <div class="filename">lg-08-minimalism-twist.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lg-09-crafted-linework.jpg" alt="Crafted linework" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Crafted Linework</div>
+          <div class="desc">Feine Linien, Gravur-Optik und illustrative Marken für taktile Tiefe - wirkt kunsthandwerklich und hochwertig.</div>
+          <div class="filename">lg-09-crafted-linework.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lg-10-smooth-atmospheric.jpg" alt="Smooth atmospheric identities" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Smooth Atmospheric Identities</div>
+          <div class="desc">Farbverläufe, weiche Übergänge und atmosphärische Farbmischungen für moderne, fließend-emotionale Logos.</div>
+          <div class="filename">lg-10-smooth-atmospheric.jpg</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Typografie-Trends</h2>
+    <p class="source-meta">Quelle: <a href="https://www.fontfabric.com/blog/top-typography-trends-for-2026/" target="_blank" rel="noopener">fontfabric.com - "Top 10 Typography Trends for 2026"</a></p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/ty-01-type-as-image.jpg" alt="Type as an Image (Ultra-Display Typography)" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Type as an Image (Ultra-Display)</div>
+          <div class="desc">Typografie muss sich nicht benehmen - Buchstaben werden zu Bildern, dekonstruiert wie bei Collins' Rebrand oder freien Handschrift-Rhythmen.</div>
+          <div class="filename">ty-01-type-as-image.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ty-02-dynamic-proportions.jpeg" alt="Dynamic Proportions" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Dynamic Proportions</div>
+          <div class="desc">Wörter extrem gestreckt oder gestaucht - breit wirkt selbstbewusst und laut, eng wirkt scharf und intensiv.</div>
+          <div class="filename">ty-02-dynamic-proportions.jpeg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ty-03-italics.jpg" alt="Italics" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Italics</div>
+          <div class="desc">Kursive Schriften verlassen die Nebenrolle und übernehmen die Hauptbühne - eine schräge Letter flüstert nie.</div>
+          <div class="filename">ty-03-italics.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ty-04-reversed-contrast.jpg" alt="Reversed Contrast" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Reversed Contrast</div>
+          <div class="desc">Dicke Horizontalen, dünne Vertikalen - dreht die typografische Logik um, unerwartet und schwer zu ignorieren.</div>
+          <div class="filename">ty-04-reversed-contrast.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ty-05-modern-antiquas.jpg" alt="Modern Antiquas" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Modern Antiquas</div>
+          <div class="desc">Antiqua-Serifenschriften als moderne, selbstbewusste Design-Tools - kein verstaubtes Replikat, sondern Vertrauen neu gebaut.</div>
+          <div class="filename">ty-05-modern-antiquas.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ty-06-historical-references.jpg" alt="Historical References" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Historical References</div>
+          <div class="desc">Ein Schuss Vergangenheit für die Zukunft - historische Bezüge schaffen schneller Bedeutung, Emotion und Vertrauen.</div>
+          <div class="filename">ty-06-historical-references.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ty-07-bulky-handwritten.jpg" alt="Bulky Handwritten" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Bulky Handwritten</div>
+          <div class="desc">Skript-Schriften trainiert und kräftig statt zart - chunky und bold, perfekt für Food-/Drink-Marken mit menschlichem Ausdruck.</div>
+          <div class="filename">ty-07-bulky-handwritten.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ty-08-digital-narrative.jpg" alt="Digital Narrative" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Digital Narrative</div>
+          <div class="desc">Digitale Nostalgie/Retro-Tech-Chic - frühe Computer-Ästhetik verschmilzt mit modernem Storytelling (z. B. pixelige Visuals).</div>
+          <div class="filename">ty-08-digital-narrative.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ty-09-ligatures.jpg" alt="Ligatures" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Ligatures</div>
+          <div class="desc">Ursprünglich eine funktionale Lösung, heute ein expressives Gestaltungsmittel - individuelle Ligaturen als Signatur-Detail.</div>
+          <div class="filename">ty-09-ligatures.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ty-10-flared-serifs.jpg" alt="Flared Serifs" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Flared Serifs</div>
+          <div class="desc">Nicht ganz Serif, nicht ganz Sans - zeitgemäß und geerdet zugleich, ideal für Marken zwischen Seriosität und Nahbarkeit.</div>
+          <div class="filename">ty-10-flared-serifs.jpg</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Illustration - weitere Stile</h2>
+    <p class="source-meta">Quelle: <a href="https://www.creativebloq.com/art/illustration/messy-meaningful-and-made-by-humans-the-biggest-illustration-trends-for-2026" target="_blank" rel="noopener">creativebloq.com - "Messy, meaningful and made by humans: the biggest illustration trends for 2026"</a></p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/cb-01-childlike-playful.png" alt="Childlike and playful" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Childlike &amp; Playful</div>
+          <div class="desc">Minimale, bewusste Farbpaletten, ausdrucksstark und absichtlich unperfekt - Illustration, die auf dem Papier entsteht, nicht am Bildschirm.</div>
+          <div class="filename">cb-01-childlike-playful.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cb-02-handdrawn-styles.jpg" alt="Hand-drawn styles" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Hand-Drawn Styles</div>
+          <div class="desc">Sticht in vollen Feeds hervor, wirkt auch klein noch lesbar und baut Vertrauen für Food-/Wellness-/Eco-Marken auf.</div>
+          <div class="filename">cb-02-handdrawn-styles.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cb-03-naive-authenticity.jpg" alt="Naive authenticity" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Naive Authenticity</div>
+          <div class="desc">Handgezeichneter Charme wie bei Spotify Wrapped - naiv wirkende, aber bewusst gesetzte Illustration als Vertrauenssignal.</div>
+          <div class="filename">cb-03-naive-authenticity.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cb-04-quiet-graphic-minimalism.png" alt="Quiet graphic minimalism" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Quiet Graphic Minimalism</div>
+          <div class="desc">Einfache Linien, flache geometrische Formen, zurückhaltende Farbe und viel Weißraum - ruhig, lesbar, premium.</div>
+          <div class="filename">cb-04-quiet-graphic-minimalism.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cb-05-narrative-packaging.jpg" alt="Narrative packaging" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Narrative Packaging</div>
+          <div class="desc">Illustrierte kleine Welten auf der Verpackung signalisieren Herkunft, Sorgfalt und Handwerk schneller als Fotografie.</div>
+          <div class="filename">cb-05-narrative-packaging.jpg</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Verpackungsdesign-Trends</h2>
+    <p class="source-meta">Quelle: <a href="https://www.designerpeople.com/blog/packaging-design-trends-2026/" target="_blank" rel="noopener">designerpeople.com - "Top 11 Packaging Design Trends 2026"</a></p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/pk-01-hyper-sustainable.webp" alt="Hyper-Sustainable Materials" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Hyper-Sustainable Materials</div>
+          <div class="desc">Algen-Filme, kompostierbare Tinten, Pilzleder und Papier aus Agrarabfall - Nachhaltigkeit als neue Definition von Luxus.</div>
+          <div class="filename">pk-01-hyper-sustainable.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/pk-02-ai-human-hybrid.webp" alt="AI + Human Hybrid Design" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">AI + Human Hybrid Design</div>
+          <div class="desc">Algorithmen visualisieren tausende Konzepte in Sekunden, Designer verfeinern sie zu finalen Entwürfen.</div>
+          <div class="filename">pk-02-ai-human-hybrid.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/pk-03-minimalism-makeover.webp" alt="Minimalism Gets a Makeover" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Minimalism Gets a Makeover</div>
+          <div class="desc">"Intentional Minimalism" statt kalter Sterilität - jede Linie, Farbe und Textur erzählt eine Geschichte.</div>
+          <div class="filename">pk-03-minimalism-makeover.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/pk-04-digital-interactive.webp" alt="Digital-Interactive Packaging" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Digital-Interactive Packaging</div>
+          <div class="desc">AR, QR-Codes und NFC verwandeln die Verpackung in ein Portal zu Mini-Games, Produktgeschichten oder Recycling-Guides.</div>
+          <div class="filename">pk-04-digital-interactive.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/pk-05-bold-palettes.webp" alt="Colours That Shout Confidence" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Colours That Shout Confidence</div>
+          <div class="desc">Vibrierende Verläufe, Candy-Neons und expressive Töne statt braver Zurückhaltung - mit Methode statt Chaos.</div>
+          <div class="filename">pk-05-bold-palettes.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/pk-06-retro-futurism.webp" alt="Retro-Futurism & Nostalgic Reboots" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Retro-Futurism &amp; Nostalgic Reboots</div>
+          <div class="desc">70er-Typografie, 90er-Pixelart oder Y2K-Metallic-Optik, gepaart mit modernen, digital wirkenden Finishes.</div>
+          <div class="filename">pk-06-retro-futurism.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/pk-07-transparent-labelling.webp" alt="Transparent and Honest Labelling" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Transparent &amp; Honest Labelling</div>
+          <div class="desc">Klare Zutatenlisten und ehrliche Kommunikation als eigenes Gestaltungsprinzip, nicht nur Pflichttext.</div>
+          <div class="filename">pk-07-transparent-labelling.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/pk-08-personalisation.webp" alt="Personalisation & Limited Runs" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Personalisation &amp; Limited Runs</div>
+          <div class="desc">On-Demand-Druck und personalisierte Verpackung lassen das Produkt wie exklusiv für einen selbst gemacht wirken.</div>
+          <div class="filename">pk-08-personalisation.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/pk-09-typography-spotlight.webp" alt="Typography Takes the Spotlight" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Typography Takes the Spotlight</div>
+          <div class="desc">Eigene Schriften, überdimensionierte Lettern und kinetische Typo-Animationen statt Typografie als Nebendarsteller.</div>
+          <div class="filename">pk-09-typography-spotlight.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/pk-10-playful-shapes.webp" alt="Playful & Experimental Shapes" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Playful &amp; Experimental Shapes</div>
+          <div class="desc">Unerwartete Silhouetten, Falten und Formen, die das Auspacken selbst zum kleinen Kunstwerk machen.</div>
+          <div class="filename">pk-10-playful-shapes.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/pk-11-culture-in-curve.webp" alt="Culture in Every Curve" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Culture in Every Curve</div>
+          <div class="desc">Verpackung erzählt kulturelle Herkunft und Tradition - inspiriert von lokaler Kunst und globaler Kreativität.</div>
+          <div class="filename">pk-11-culture-in-curve.webp</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Print-/Poster-Trends</h2>
+    <p class="source-meta">Quelle: <a href="https://littlerockprinting.com/graphic-design-trends-to-modernize-your-print-materials/" target="_blank" rel="noopener">littlerockprinting.com - "12 Graphic Design Trends to Modernize Your Print Materials"</a></p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/lp-01-naive-design.png" alt="Naive Design" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Naive Design</div>
+          <div class="desc">Auch "Doodle Core" genannt: kindlich-unperfekte Formen, schiefe Proportionen, handgezeichnete verspielte Elemente wie Kritzeleien im Schulheft.</div>
+          <div class="filename">lp-01-naive-design.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lp-02-kid-core.png" alt="Kid Core" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Kid Core</div>
+          <div class="desc">Verwandt mit Naive Design, aber nostalgischer - bunte Sticker- und Kindheits-Ästhetik für die inzwischen erwachsene Gen Z.</div>
+          <div class="filename">lp-02-kid-core.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lp-03-punk-grunge-revival.png" alt="Punk-Grunge Revival" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Punk-Grunge Revival</div>
+          <div class="desc">90er-Comeback: roh, rebellisch, laut - Gegenbewegung zur polierten Bildsprache, mit sichtbarer visueller Reibung.</div>
+          <div class="filename">lp-03-punk-grunge-revival.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lp-04-distorted-portraits.png" alt="Distorted Portraits" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Distorted Portraits</div>
+          <div class="desc">Verzerrung als bewusstes Stilmittel - Gegenbewegung zur sterilen KI-Perfektion fotorealistischer Portraits.</div>
+          <div class="filename">lp-04-distorted-portraits.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lp-05-type-collage.png" alt="Type Collage" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Type Collage</div>
+          <div class="desc">Mehrere Schriften und Stile collagiert - laut, regelbrechend, voller Energie schon vor dem ersten Lesen.</div>
+          <div class="filename">lp-05-type-collage.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lp-06-maximalism-analog-chaos.png" alt="Maximalism / Layered Compositions / Analog Chaos" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Maximalism / Analog Chaos</div>
+          <div class="desc">Dichte, geschichtete Kompositionen als bewusster Gegenpol zu glattem, generischem "AI slop".</div>
+          <div class="filename">lp-06-maximalism-analog-chaos.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lp-07-fluid-liquid-glass.png" alt="Fluid / Liquid Glass Aesthetic" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Fluid / Liquid Glass Aesthetic</div>
+          <div class="desc">Erwachsen gewordener Glassmorphism - unscharfe, transluzente Flächen für ein modernes, verträumtes Gefühl.</div>
+          <div class="filename">lp-07-fluid-liquid-glass.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lp-08-acidcore.png" alt="Acidcore" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Acidcore</div>
+          <div class="desc">Sensorische Reizüberflutung: Neon-Verläufe, "schmelzende" Verzerrungen, vibrierende Formen und Typografie.</div>
+          <div class="filename">lp-08-acidcore.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lp-09-neobrutalist-utilitarian.png" alt="Neobrutalist Utilitarian Design" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Neobrutalist Utilitarian Design</div>
+          <div class="desc">Bewusst "langweilig": Funktion vor Ästhetik, kalkulierte Schlichtheit statt Effekthascherei.</div>
+          <div class="filename">lp-09-neobrutalist-utilitarian.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lp-10-future-medieval-neofolk.png" alt="Future Medieval / Neo Folk" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Future Medieval / Neo Folk</div>
+          <div class="desc">Alte Symbole, verzierte Details und historische Typografie durch eine zeitgenössische Linse betrachtet.</div>
+          <div class="filename">lp-10-future-medieval-neofolk.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/lp-11-technical-futurism.png" alt="Technical Futurism" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Technical Futurism</div>
+          <div class="desc">Sci-Fi-Interfaces und Blueprint-Optik: Raster, schematische Linien, datengetriebene Diagramme.</div>
+          <div class="filename">lp-11-technical-futurism.png</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Grafikdesign-Trends (weitere)</h2>
+    <p class="source-meta">Quelle: <a href="https://www.kittl.com/blogs/graphic-design-trends-2026/" target="_blank" rel="noopener">kittl.com - "10 Graphic Design Trends 2026"</a> (nur die Trends, die anderswo in dieser Sammlung noch nicht vorkommen)</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/kt-01-blueprint-design.png" alt="Blueprint Design" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Blueprint Design</div>
+          <div class="desc">Technische Zeichnungs-Ästhetik, die alles "übererklärt" - Konstruktionslinien und Maßangaben als Stilmittel.</div>
+          <div class="filename">kt-01-blueprint-design.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kt-02-trinket-design.png" alt="Trinket Design" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Trinket Design</div>
+          <div class="desc">Das Objekt selbst wird zur Identität - ein kleines Ding/Accessoire als Markenzeichen statt eines klassischen Logos.</div>
+          <div class="filename">kt-02-trinket-design.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kt-03-surveillance-design.webp" alt="Surveillance Design" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Surveillance Design</div>
+          <div class="desc">Kühle, präzise Überwachungskamera-/Timestamp-Optik als grafisches Stilmittel.</div>
+          <div class="filename">kt-03-surveillance-design.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kt-04-grainy-blur-a.webp" alt="Grainy Blur Design" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Grainy Blur Design</div>
+          <div class="desc">Körnige, verwischte Optik für verträumte, emotionale Grafik statt scharfer digitaler Präzision.</div>
+          <div class="filename">kt-04-grainy-blur-a.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kt-04-grainy-blur-b.webp" alt="Grainy Blur Design Variante 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Grainy Blur Design (Variante 2)</div>
+          <div class="desc">Weiteres Beispiel derselben körnig-verwischten Ästhetik.</div>
+          <div class="filename">kt-04-grainy-blur-b.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kt-04-grainy-blur-c.webp" alt="Grainy Blur Design Variante 3" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Grainy Blur Design (Variante 3)</div>
+          <div class="desc">Floraler Anwendungsfall derselben Ästhetik.</div>
+          <div class="filename">kt-04-grainy-blur-c.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kt-05-signal-graphics.webp" alt="Signal Graphics" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Signal Graphics</div>
+          <div class="desc">Kinetische Visuals inspiriert von 90er-/Y2K-Nostalgie - wie eingefrorene Sendersuchlauf-Bilder.</div>
+          <div class="filename">kt-05-signal-graphics.webp</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kt-06-frutiger-aero.png" alt="Frutiger Aero" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Frutiger Aero</div>
+          <div class="desc">Optimistische Windows-XP-Ära-Tech-Ästhetik: glänzend, luftig, naturverbunden-digital (Special Mention).</div>
+          <div class="filename">kt-06-frutiger-aero.png</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Webdesign-Trends (weitere)</h2>
+    <p class="source-meta">Quelle: <a href="https://muz.li/blog/web-design-trends-2026/" target="_blank" rel="noopener">Muzli Blog - "Web Design Trends 2026"</a> (nur die Trends, die sich nicht mit den anderen Webdesign-Quellen überschneiden)</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/mz-01-responsive-3d.png" alt="Responsive 3D That Actually Feels Alive" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Responsive 3D That Actually Feels Alive</div>
+          <div class="desc">Leichte Frameworks wie Spline oder React Three Fiber machen 3D-Web-Umgebungen, die sich bewegen, kippen und reagieren.</div>
+          <div class="filename">mz-01-responsive-3d.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/mz-02-webgl-for-everyone.png" alt="WebGL for Everyone" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">WebGL for Everyone</div>
+          <div class="desc">No-Code-WebGL-Baukästen bringen komplexe Shader-Effekte einem breiten Publikum statt nur Entwicklern.</div>
+          <div class="filename">mz-02-webgl-for-everyone.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/mz-03-micro-animations.png" alt="Micro-Animations Are Growing Up" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Micro-Animations Are Growing Up</div>
+          <div class="desc">"Micro Delight": der Bounce eines Buttons, kleine Details, die jetzt bewusst und ausgereift gestaltet werden.</div>
+          <div class="filename">mz-03-micro-animations.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/mz-04-sound-of-design.png" alt="The Sound of Design" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">The Sound of Design</div>
+          <div class="desc">Sound als nächster Sinn im Interface-Design: ein Klick, ein Whoosh, ein Ton für Feedback und Klarheit.</div>
+          <div class="filename">mz-04-sound-of-design.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/mz-05-human-layer.png" alt="The Human Layer" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">The Human Layer</div>
+          <div class="desc">Interaktion bewegt sich über Screen, Maus und Tastatur hinaus - Design wird weniger visuell, mehr menschlich.</div>
+          <div class="filename">mz-05-human-layer.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/mz-06-goodbye-beige-hello-bold.png" alt="Goodbye Beige, Hello Bold" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Goodbye Beige, Hello Bold</div>
+          <div class="desc">Nach Jahren von Dark Mode und gedämpften Paletten wartet Farbe auf ihr Comeback.</div>
+          <div class="filename">mz-06-goodbye-beige-hello-bold.png</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>3D-Art-Trends</h2>
+    <p class="source-meta">Quelle: <a href="https://www.creativebloq.com/3d/the-critical-3d-art-trends-that-will-impact-2026" target="_blank" rel="noopener">creativebloq.com - "The critical 3D art trends that will impact 2026"</a></p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/c3-01-hybrid-2d3d-a.jpg" alt="Hybrid 2D-3D Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Hybrid 2D-3D Illustration</div>
+          <div class="desc">3D-Assets im 2D-Look oder umgekehrt in einem Frame gemischt - eigenständige, charakterstarke Bildsprache.</div>
+          <div class="filename">c3-01-hybrid-2d3d-a.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/c3-01-hybrid-2d3d-b.jpg" alt="Hybrid 2D-3D Illustration Variante 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Hybrid 2D-3D Illustration (Variante 2)</div>
+          <div class="desc">Weiteres Beispiel, hier im Look moderner animierter Charaktere.</div>
+          <div class="filename">c3-01-hybrid-2d3d-b.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/c3-02-3d-typography.jpg" alt="3D Typography" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">3D Typography</div>
+          <div class="desc">Buchstaben als räumliche, plastische Objekte statt flacher Schrift.</div>
+          <div class="filename">c3-02-3d-typography.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/c3-03-squishy-aesthetics.jpg" alt="Squishy Aesthetics" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Squishy Aesthetics</div>
+          <div class="desc">Weiche, "plushcore"-artige 3D-Formen - beliebt in Social-Media- und Markendesign.</div>
+          <div class="filename">c3-03-squishy-aesthetics.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/c3-04-lofi-3d.png" alt="Lo-Fi 3D" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Lo-Fi 3D</div>
+          <div class="desc">Bewusst grobes Low-Poly als Antwort auf KI-Bildermüdigkeit - persönlich statt technisch perfekt.</div>
+          <div class="filename">c3-04-lofi-3d.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/c3-05-anime-style.jpg" alt="Anime Style" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Anime Style</div>
+          <div class="desc">Cel-Shading und anime-artiges Rendering direkt im Viewport bzw. in der Game-Engine.</div>
+          <div class="filename">c3-05-anime-style.jpg</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="source">
+    <h2>Illustrations-Grundstile</h2>
+    <p class="source-meta">Zusammengeführt aus <a href="https://doncorgi.com/blog/illustration-styles/" target="_blank" rel="noopener">doncorgi.com - "Ultimate Guide to Illustration Styles"</a> und <a href="https://www.21-draw.com/illustration-styles/" target="_blank" rel="noopener">21-draw.com - "The Definitive Guide to Illustration Styles"</a> - dieselben Grundstile, teils mit Beispielbildern aus beiden Quellen.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-01a-flat-illustration.jpg" alt="Flat Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Flat Illustration</div>
+          <div class="desc">Einfache, geometrische Formen und kräftige Flächenfarben statt Tiefe und Textur - reduziert und modern. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-01a-flat-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-01b-flat-illustration.jpg" alt="Flat Illustration Beispiel 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Flat Illustration (Beispiel 2)</div>
+          <div class="desc">Weiteres Beispiel derselben reduzierten, flächigen Bildsprache. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-01b-flat-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-02a-line-art.jpg" alt="Line Art" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Line Art</div>
+          <div class="desc">Betont die Form über Details - reduzierte Linien, kaum Hintergrund, oft ganz ohne Farbe. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-02a-line-art.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-02b-line-art.jpg" alt="Line Art Beispiel 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Line Art (Beispiel 2)</div>
+          <div class="desc">Weiteres Beispiel reiner Linienzeichnung ohne Farbfläche. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-02b-line-art.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-03a-cartoon-illustration.jpg" alt="Cartoon Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Cartoon Illustration</div>
+          <div class="desc">Einfache Formen mit spürbarer Übertreibung - kräftige Linien und meist kräftige Farben. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-03a-cartoon-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-03b-cartoon-illustration.jpg" alt="Cartoon Illustration Beispiel 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Cartoon Illustration (Beispiel 2)</div>
+          <div class="desc">Weiteres Beispiel derselben verspielt-übertriebenen Bildsprache. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-03b-cartoon-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-04-minimalist-illustration.jpg" alt="Minimalist Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Minimalist Illustration</div>
+          <div class="desc">Wenige Elemente, viel Weißraum - Klarheit und Ruhe statt Detailfülle. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-04-minimalist-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-05a-fashion-illustration.jpg" alt="Fashion Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Fashion Illustration</div>
+          <div class="desc">Zeigt Kleidung und Accessoires - Modedesigner nutzen sie, um ihre Kollektionen zu präsentieren. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-05a-fashion-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-05b-fashion-illustration.jpg" alt="Fashion Illustration Beispiel 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Fashion Illustration (Beispiel 2)</div>
+          <div class="desc">Weiteres Beispiel modischer Illustration mit elegant gestreckten Proportionen. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-05b-fashion-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-06a-comics-graphic-novels.jpg" alt="Comics" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Comics / Graphic Novels</div>
+          <div class="desc">Lebendige, comichafte Bildsprache mit fantasievollen Geschichten - Sequenz über Einzelbild. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-06a-comics-graphic-novels.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-06b-comics-graphic-novels.jpg" alt="Comics Beispiel 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Comics / Graphic Novels (Beispiel 2)</div>
+          <div class="desc">Weiteres Beispiel sequenzieller Comic-Illustration. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-06b-comics-graphic-novels.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-07a-retro-vintage.jpeg" alt="Retro Vintage" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Retro / Vintage Illustration</div>
+          <div class="desc">Greift Stile vergangener Jahrzehnte auf - alte Schriften, Muster und kräftige Linien für Nostalgie. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-07a-retro-vintage.jpeg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-07b-retro-vintage.jpg" alt="Retro Vintage Beispiel 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Retro / Vintage Illustration (Beispiel 2)</div>
+          <div class="desc">Weiteres Beispiel nostalgischer, vintage-anmutender Bildsprache. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-07b-retro-vintage.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-08-typography-illustration.jpg" alt="Typography Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Typografie-Illustration</div>
+          <div class="desc">Text und Schriftarten selbst werden zur Komposition - einprägsam durch mutige Buchstabenformen. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-08-typography-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-09-childrens-book-illustration.png" alt="Children&#x27;s Book Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Kinderbuch-Illustration</div>
+          <div class="desc">Bunt und vereinfacht, speziell für junge Leser gemacht. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-09-childrens-book-illustration.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-10-fantasy-illustration.jpg" alt="Fantasy Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Fantasy-Illustration</div>
+          <div class="desc">Stimmungsvoll und verzaubernd - Mythologie, Magie, Fabelwesen und übernatürliche Szenen. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-10-fantasy-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-11-book-illustration.jpg" alt="Book Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Buchillustration</div>
+          <div class="desc">Bringt Geschichten durch Bilder zum Leben - hilft, den Text besser zu verstehen. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-11-book-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-12-realism.jpg" alt="Realism" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Realismus</div>
+          <div class="desc">Konzentriert sich auf die exakte Wiedergabe der realen Welt in Proportion, Textur und Licht. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-12-realism.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-13-concept-art.jpg" alt="Concept Art" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Concept Art</div>
+          <div class="desc">Hält die prägenden Eigenschaften eines Designs fest und legt den visuellen Stil eines Projekts fest. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-13-concept-art.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-14-3d-illustration.jpg" alt="3D Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">3D-Illustration</div>
+          <div class="desc">Erzeugt die Illusion von Tiefe und Volumen durch Licht, Schatten und Rendering-Techniken. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-14-3d-illustration.jpg</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Cartoon-/Animationsstile (nach Figur/Serie)</h2>
+    <p class="source-meta">Quelle: <a href="https://doncorgi.com/blog/types-of-cartoon-drawing-styles/" target="_blank" rel="noopener">doncorgi.com - "25 Types Of Cartoon Drawing Styles With Examples"</a> - jeder Stil an einer konkreten, bekannten Serie/einem Zeichner festgemacht.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-01-classic-manga.jpg" alt="Classic Manga" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Classic Manga</div>
+          <div class="desc">Menschenähnliche Proportionen mit großen, ausdrucksstarken Augen - z. B. Sailor Moon, GTO.</div>
+          <div class="filename">cs-01-classic-manga.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-02-modern-anime.jpg" alt="Modern Anime" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Modern Anime</div>
+          <div class="desc">Komplexer und dynamischer, besonders in Bewegungsszenen - z. B. Fullmetal Alchemist, My Hero Academia.</div>
+          <div class="filename">cs-02-modern-anime.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-03-chibi.jpg" alt="Chibi" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Chibi</div>
+          <div class="desc">Super-deformiert: kleiner Körper, großer Kopf - niedlich und verspielt.</div>
+          <div class="filename">cs-03-chibi.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-04-tim-burton.jpg" alt="Tim Burton" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Tim Burton</div>
+          <div class="desc">Charakteristisch dunkel, aber voller Emotion - unverwechselbare, schlaksige Figuren.</div>
+          <div class="filename">cs-04-tim-burton.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-05-simpsons.jpg" alt="The Simpsons" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Die Simpsons</div>
+          <div class="desc">Gelbe Haut, große Augen - einer der bekanntesten Cartoon-Stile überhaupt.</div>
+          <div class="filename">cs-05-simpsons.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-06-classic-disney.jpg" alt="Classic Disney" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Classic Disney</div>
+          <div class="desc">Frühe Disney-Ära, z. B. Steamboat Willie - runde, simple Formen.</div>
+          <div class="filename">cs-06-classic-disney.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-07-mid-century-disney.jpg" alt="Mid Century Disney" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Disney (Mitte 20. Jh.)</div>
+          <div class="desc">Menschlicher wirkende Figuren, Arbeit mit Referenzaufnahmen von Schauspielern.</div>
+          <div class="filename">cs-07-mid-century-disney.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-08-modern-disney.jpg" alt="Modern Disney" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Modern Disney</div>
+          <div class="desc">Kräftige Farben, z. B. Lilo & Stitch - direkte Weiterentwicklung des Mid-Century-Stils.</div>
+          <div class="filename">cs-08-modern-disney.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-09-peanuts.jpg" alt="Peanuts" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Peanuts / Charlie Brown</div>
+          <div class="desc">Handgemacht und wackelig von Charles M. Schulz - vielfach kopiert, einzigartig.</div>
+          <div class="filename">cs-09-peanuts.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-10-south-park.jpg" alt="South Park" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">South Park</div>
+          <div class="desc">Sehr geometrisch, kaum Schatten oder Highlights - bewusst flach.</div>
+          <div class="filename">cs-10-south-park.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-11-dragon-ball-toriyama.jpg" alt="Dragon Ball" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Dragon Ball / Akira Toriyama</div>
+          <div class="desc">Stark definierte Muskulatur, sofort wiedererkennbar.</div>
+          <div class="filename">cs-11-dragon-ball-toriyama.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-12-adventure-time.jpg" alt="Adventure Time" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Adventure Time</div>
+          <div class="desc">Sehr geometrisch, die Figuren wirken fast „knochenlos“.</div>
+          <div class="filename">cs-12-adventure-time.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-13-miyazaki-ghibli.jpg" alt="Hayao Miyazaki Ghibli" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Hayao Miyazaki / Ghibli</div>
+          <div class="desc">Feine Linien, detailreich gebaute Figuren und Umgebungen - z. B. Chihiros Reise.</div>
+          <div class="filename">cs-13-miyazaki-ghibli.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-14-crayon-shinchan.jpg" alt="Crayon Shin-Chan" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Crayon Shin-Chan</div>
+          <div class="desc">Bewusst simpel, wie mit Wachsmalstiften gezeichnet.</div>
+          <div class="filename">cs-14-crayon-shinchan.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-15-lupin-the-3rd.jpg" alt="Lupin The 3rd" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Lupin The 3rd</div>
+          <div class="desc">Über Jahrzehnte gewachsener Stil mit interessanter Entwicklung.</div>
+          <div class="filename">cs-15-lupin-the-3rd.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-16-betty-boop.jpg" alt="Betty Boop" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Betty Boop</div>
+          <div class="desc">Starker Schwarz-Weiß-Kontrast, weltbekannt geworden.</div>
+          <div class="filename">cs-16-betty-boop.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-17-fist-of-the-north-star.jpg" alt="Fist Of The North Star" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Fist Of The North Star</div>
+          <div class="desc">Übermenschlich definierte Proportionen, sehr grungy im Original-Manga.</div>
+          <div class="filename">cs-17-fist-of-the-north-star.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-18-berserk.jpg" alt="Berserk" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Berserk</div>
+          <div class="desc">Sehr dunkel und extrem detailliert.</div>
+          <div class="filename">cs-18-berserk.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-19-calvin-and-hobbes.jpg" alt="Calvin and Hobbes" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Calvin and Hobbes</div>
+          <div class="desc">Bill Wattersons Mix aus dünnen und mittleren Linien - schlicht und einzigartig.</div>
+          <div class="filename">cs-19-calvin-and-hobbes.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-20-powerpuff-girls.jpg" alt="Powerpuff Girls" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Powerpuff Girls</div>
+          <div class="desc">Sehr geometrisch, dicke Linien, farbenfroh.</div>
+          <div class="filename">cs-20-powerpuff-girls.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-21-archer.jpg" alt="Archer" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Archer</div>
+          <div class="desc">Mix aus Vektorgrafik und Realismus - ungewöhnlich realistische Proportionen für einen Cartoon-Stil.</div>
+          <div class="filename">cs-21-archer.jpg</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Karikatur-Künstler (historisch/international)</h2>
+    <p class="source-meta">Quelle: <a href="https://www.caricaturemaster.com/famous-caricaturists" target="_blank" rel="noopener">caricaturemaster.com - "11 Famous Caricaturists &amp; their Incredible Life Stories"</a> - Karikaturisten aus verschiedenen Ländern und Epochen, jeweils mit eigener Handschrift.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-01-al-hirschfeld.jpg" alt="Al Hirschfeld Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Al Hirschfeld</div>
+          <div class="desc">„Broadway's King of Caricature“ - elegante, fließende Schwarz-Weiß-Linienführung, berühmt für Theater- und Hollywood-Porträts.</div>
+          <div class="filename">ka-01-al-hirschfeld.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-02-andre-gill.jpg" alt="Andre Gill Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">André Gill</div>
+          <div class="desc">Französischer Karikaturist des 19. Jahrhunderts, bekannt für bissige politische Satire gegen Napoleon III.</div>
+          <div class="filename">ka-02-andre-gill.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-03-alexander-saroukhan.jpg" alt="Alexander Saroukhan Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Alexander Saroukhan</div>
+          <div class="desc">Ägyptisch-armenischer Karikaturist, dessen Zeichnungen den Zweiten Weltkrieg vorwegnahmen.</div>
+          <div class="filename">ka-03-alexander-saroukhan.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-04-boris-yefimov.jpg" alt="Boris Yefimov Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Boris Jefimowitsch Jefimow</div>
+          <div class="desc">Sowjetisch-russischer Karikaturist mit außergewöhnlich langer Karriere, politische Zeichnungen.</div>
+          <div class="filename">ka-04-boris-yefimov.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-05-carlo-pellegrini.jpg" alt="Carlo Pellegrini Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Carlo Pellegrini</div>
+          <div class="desc">Italienisch-britischer Karikaturist („Ape“) - elegante viktorianische Gesellschaftskarikaturen für Vanity Fair.</div>
+          <div class="filename">ka-05-carlo-pellegrini.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-06-hajjaj-brothers.jpg" alt="Emad and Osama Hajjaj Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Emad &amp; Osama Hajjaj</div>
+          <div class="desc">Jordanische Karikaturisten-Brüder, politische und gesellschaftliche Satire.</div>
+          <div class="filename">ka-06-hajjaj-brothers.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-07-isaac-cruikshank.jpg" alt="Isaac Cruikshank Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Isaac Cruikshank</div>
+          <div class="desc">Schottischer Karikaturist des 18. Jahrhunderts, satirische Radierungen.</div>
+          <div class="filename">ka-07-isaac-cruikshank.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-08-murray-george-webb.jpg" alt="Murray George Webb Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Murray George Webb</div>
+          <div class="desc">Neuseeländischer Karikaturist, Sport- und Politikkarikaturen.</div>
+          <div class="filename">ka-08-murray-george-webb.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-09-omaya-joha.jpg" alt="Omaya Joha Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Omaya Joha</div>
+          <div class="desc">Palästinensische Karikaturistin, eine der ersten Frauen im Fach, politische Satire.</div>
+          <div class="filename">ka-09-omaya-joha.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-10-vitaly-peskov.jpg" alt="Vitaly Peskov Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Vitaly Peskov</div>
+          <div class="desc">Russischer Karikaturist.</div>
+          <div class="filename">ka-10-vitaly-peskov.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-11-peggy-bacon.jpg" alt="Peggy Bacon Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Margaret „Peggy“ Bacon</div>
+          <div class="desc">US-amerikanische Karikaturistin und Druckgrafikerin, satirische Porträts von Literaten und Künstlern.</div>
+          <div class="filename">ka-11-peggy-bacon.jpg</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Karikatur-Genres/Techniken</h2>
+    <p class="source-meta">Quelle: <a href="https://www.photolamus.com/blog/types-caricature-styles-techniques" target="_blank" rel="noopener">photolamus.com - "Dive into Caricatures: Exploring Portrait Styles and Techniques"</a> - Karikatur nach Einsatzzweck/Technik statt nach Künstler unterschieden.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-01-exaggerated.png" alt="Exaggerated Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Exaggerated</div>
+          <div class="desc">Die Grundform der Karikatur: markante Merkmale bewusst überzeichnet, ohne die Erkennbarkeit zu verlieren.</div>
+          <div class="filename">kg-01-exaggerated.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-02-social-satire.png" alt="Social Satire Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Social Satire</div>
+          <div class="desc">Gesellschaftskritik durch Übertreibung - Zustände statt Einzelpersonen im Fokus.</div>
+          <div class="filename">kg-02-social-satire.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-03-digital-caricature.png" alt="Digital Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Digital Caricature</div>
+          <div class="desc">Am Tablet oder mit Software erstellt - moderne Werkzeuge, klassisches Prinzip.</div>
+          <div class="filename">kg-03-digital-caricature.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-04-portrait-caricature.png" alt="Portrait Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Portrait Caricature</div>
+          <div class="desc">Nah am echten Porträt, mit dezenten, gezielten Übertreibungen einzelner Züge.</div>
+          <div class="filename">kg-04-portrait-caricature.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-05-caricature-sculpture.png" alt="Caricature Sculpture" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Caricature Sculpture</div>
+          <div class="desc">Dreidimensionale Karikatur - Übertreibung als Skulptur statt Zeichnung.</div>
+          <div class="filename">kg-05-caricature-sculpture.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-06-anime-manga-caricature.png" alt="Anime Manga Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Anime / Manga Caricature</div>
+          <div class="desc">Karikatur im Anime-/Manga-Look - große Augen, stilisierte Gesichtszüge.</div>
+          <div class="filename">kg-06-anime-manga-caricature.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-07-celebrity-caricature.png" alt="Celebrity Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Celebrity Caricature</div>
+          <div class="desc">Prominente als Zielscheibe - Wiedererkennbarkeit trotz starker Verzerrung entscheidend.</div>
+          <div class="filename">kg-07-celebrity-caricature.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-08-live-caricature.png" alt="Live Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Live Caricature</div>
+          <div class="desc">Schnelle Live-Zeichnung vor Ort, z. B. auf Jahrmärkten oder Events.</div>
+          <div class="filename">kg-08-live-caricature.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-09-editorial-caricature.png" alt="Editorial Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Editorial Caricature</div>
+          <div class="desc">Politische Karikatur für Zeitungen/Magazine - Kommentar zum Tagesgeschehen.</div>
+          <div class="filename">kg-09-editorial-caricature.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-10-cartoon-caricature.png" alt="Cartoon Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Cartoon Caricature</div>
+          <div class="desc">Karikatur im Cartoon-Look - verspielter und weniger streng als die klassische Portrait-Karikatur.</div>
+          <div class="filename">kg-10-cartoon-caricature.png</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Hafenstadt-Entwürfe (eigene KI-Generierung)</h2>
+    <p class="source-meta">Keine externe Quelle - eigene Bildgenerierung (Higgsfield / nano_banana_pro, image-to-image) für das Barbara-Sailer-Website-Projekt. Ausgangspunkt war die Häuserszene im Vordergrund von "stil-19-surreal.png" (Magritte-Ölgemälde-Stil), als eigenständiges Motiv weitergebaut: Straße mit Häuserzeile, Kirche, Hafenmauer, Steg, Freilichtbühne mit Weinrot-Vorhang.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/hz-01-strasse-a.png" alt="Hafenstadt Straßenperspektive A" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Straßenperspektive A</div>
+          <div class="desc">Häuserzeile links, Kirche mittig, Freilichtbühne rechts auf der Hafenmauer.</div>
+          <div class="filename">hz-01-strasse-a.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/hz-02-strasse-b.png" alt="Hafenstadt Straßenperspektive B" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Straßenperspektive B</div>
+          <div class="desc">Andere Komposition derselben Straßenszene.</div>
+          <div class="filename">hz-02-strasse-b.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/hz-03-strasse-c.png" alt="Hafenstadt Straßenperspektive C" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Straßenperspektive C</div>
+          <div class="desc">Weitere Komposition derselben Straßenszene.</div>
+          <div class="filename">hz-03-strasse-c.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/hz-04-steg.png" alt="Hafenstadt Blick vom Steg" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Blick vom Steg</div>
+          <div class="desc">Blick vom Steg zurück Richtung Stadt.</div>
+          <div class="filename">hz-04-steg.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/hz-05-panorama.png" alt="Hafenstadt Panorama" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Panorama</div>
+          <div class="desc">Erhöhte, panoramische Übersicht über die ganze Bucht.</div>
+          <div class="filename">hz-05-panorama.png</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
 </main>
-<footer>
-  <p>Reine private Recherche-/Moodboard-Sammlung. Rechte an den einzelnen Bildern liegen bei
-  den jeweiligen Urhebern/Publikationen.</p>
-</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-nav prev" id="lightboxPrevBtn" type="button" aria-label="Vorheriges Bild">‹</button>
+  <button class="lightbox-nav next" id="lightboxNextBtn" type="button" aria-label="Nächstes Bild">›</button>
+  <div class="lightbox-panel">
+    <div class="lightbox-toolbar">
+      <span class="lightbox-caption" id="lightboxCaption"></span>
+      <div class="lightbox-actions">
+        <button class="lightbox-btn" id="lightboxRejectBtn" type="button">Nicht verwenden</button>
+        <button class="lightbox-btn" id="lightboxCopyBtn" type="button">Kopieren</button>
+        <button class="lightbox-btn close" id="lightboxCloseBtn" type="button" aria-label="Schließen">✕</button>
+      </div>
+    </div>
+    <div class="lightbox-image-wrap">
+      <img id="lightboxImg" src="" alt="">
+    </div>
+  </div>
+</div>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxCopyBtn = document.getElementById('lightboxCopyBtn');
+  const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+  const lightboxRejectBtn = document.getElementById('lightboxRejectBtn');
+  const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
+  const lightboxNextBtn = document.getElementById('lightboxNextBtn');
+  const rejectCountEl = document.getElementById('rejectCount');
+  const exportRejectedBtn = document.getElementById('exportRejectedBtn');
+  const resetRejectedBtn = document.getElementById('resetRejectedBtn');
+
+  // Merkt sich abgelehnte Bilder dauerhaft im Browser (localStorage) - kein
+  // Server/Backend nötig. Bleibt über Reloads und Browser-Neustarts erhalten,
+  // ist aber an dieses Browserprofil auf diesem Rechner gebunden.
+  const STORAGE_KEY = 'stil-recherche-rejected';
+  let rejected = new Set();
+  try {
+    rejected = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
+  } catch (e) {
+    rejected = new Set();
+  }
+  // Flache Liste aller Bilder ueber alle Sektionen/Quellen hinweg, in
+  // DOM-Reihenfolge - erlaubt Pfeiltasten-Navigation quer durch die ganze
+  // Seite, nicht nur innerhalb einer Sektion.
+  const galleryItems = [];
+  let currentIndex = -1;
+  let currentImg = null;
+  let currentPanel = null;
+  let currentBtn = null;
+
+  function saveRejected() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...rejected]));
+    updateRejectCount();
+  }
+
+  function updateRejectCount() {
+    rejectCountEl.textContent = rejected.size + ' Bild' + (rejected.size === 1 ? '' : 'er') + ' aussortiert';
+  }
+
+  function imgKey(img) {
+    return img.getAttribute('src');
+  }
+
+  // "panel" ist die Einheit, die beim Ablehnen komplett auf 20% Deckkraft
+  // faedt: bei Einzelbild-Karten die ganze .card (Bild + Stilname + Text),
+  // bei den Trend-Mini-Galerien nur die einzelne Thumbnail-Box (.t), weil
+  // dort mehrere Bilder sich einen gemeinsamen Titel/Text teilen.
+  function panelFor(box) {
+    return box.closest('.card') || box;
+  }
+
+  function applyState(panel, img, btn) {
+    const isRejected = rejected.has(imgKey(img));
+    panel.classList.toggle('rejected', isRejected);
+    if (btn) {
+      btn.classList.toggle('active', isRejected);
+      btn.textContent = isRejected ? '↺' : '✕';
+      btn.title = isRejected ? 'Zurückholen' : 'Nicht verwenden (Panel auf 20% Deckkraft dimmen)';
+    }
+    return isRejected;
+  }
+
+  function toggleReject(panel, img, btn) {
+    const key = imgKey(img);
+    if (rejected.has(key)) {
+      rejected.delete(key);
+    } else {
+      rejected.add(key);
+    }
+    applyState(panel, img, btn);
+    saveRejected();
+    if (currentImg === img) {
+      const isR = rejected.has(key);
+      lightboxRejectBtn.textContent = isR ? 'Zurückholen' : 'Nicht verwenden';
+      lightboxRejectBtn.classList.toggle('active', isR);
+    }
+  }
+
+  // Reject-Buttons dynamisch in jede Thumbnail-Box einsetzen, statt jede
+  // Karte im HTML einzeln anzupassen.
+  document.querySelectorAll('.card .thumb, .trend-thumbs .t').forEach(box => {
+    const img = box.querySelector('img');
+    if (!img) return;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'reject-btn';
+    box.appendChild(btn);
+    const panel = panelFor(box);
+    applyState(panel, img, btn);
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleReject(panel, img, btn);
+    });
+    const index = galleryItems.length;
+    galleryItems.push({ img, panel, btn });
+    img.addEventListener('click', () => openLightboxAt(index));
+  });
+
+  updateRejectCount();
+
+  function openLightboxAt(index) {
+    currentIndex = (index + galleryItems.length) % galleryItems.length;
+    const item = galleryItems[currentIndex];
+    currentImg = item.img;
+    currentPanel = item.panel;
+    currentBtn = item.btn;
+    lightboxImg.src = currentImg.getAttribute('src');
+    const group = currentImg.closest('.card, .trend-block');
+    lightboxCaption.textContent = group ? group.querySelector('.style-name').textContent : currentImg.alt;
+    const isRejected = rejected.has(imgKey(currentImg));
+    lightboxRejectBtn.textContent = isRejected ? 'Zurückholen' : 'Nicht verwenden';
+    lightboxRejectBtn.classList.toggle('active', isRejected);
+    lightbox.classList.add('open');
+  }
+
+  function showRelative(delta) {
+    if (currentIndex === -1) return;
+    openLightboxAt(currentIndex + delta);
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightboxImg.src = '';
+    lightboxCopyBtn.textContent = 'Kopieren';
+    currentIndex = -1;
+    currentImg = null;
+    currentPanel = null;
+    currentBtn = null;
+  }
+
+  lightboxCloseBtn.addEventListener('click', closeLightbox);
+  lightboxPrevBtn.addEventListener('click', () => showRelative(-1));
+  lightboxNextBtn.addEventListener('click', () => showRelative(1));
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowRight') showRelative(1);
+    else if (e.key === 'ArrowLeft') showRelative(-1);
+  });
+
+  lightboxRejectBtn.addEventListener('click', () => {
+    if (!currentImg) return;
+    toggleReject(currentPanel, currentImg, currentBtn);
+  });
+
+  lightboxCopyBtn.addEventListener('click', async () => {
+    try {
+      const res = await fetch(lightboxImg.src);
+      const blob = await res.blob();
+      const bitmap = await createImageBitmap(blob);
+      const canvas = document.createElement('canvas');
+      canvas.width = bitmap.width;
+      canvas.height = bitmap.height;
+      canvas.getContext('2d').drawImage(bitmap, 0, 0);
+      const pngBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+      await navigator.clipboard.write([new ClipboardItem({ 'image/png': pngBlob })]);
+      lightboxCopyBtn.textContent = 'Kopiert!';
+      setTimeout(() => { lightboxCopyBtn.textContent = 'Kopieren'; }, 1500);
+    } catch (err) {
+      lightboxCopyBtn.textContent = 'Rechtsklick > Bild kopieren';
+      setTimeout(() => { lightboxCopyBtn.textContent = 'Kopieren'; }, 2500);
+    }
+  });
+
+  exportRejectedBtn.addEventListener('click', () => {
+    const list = [...rejected].sort();
+    const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'aussortiert.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  resetRejectedBtn.addEventListener('click', () => {
+    if (rejected.size === 0) return;
+    if (!confirm('Wirklich alle ' + rejected.size + ' Markierungen zurücksetzen?')) return;
+    rejected.clear();
+    saveRejected();
+    document.querySelectorAll('.card .thumb, .trend-thumbs .t').forEach(box => {
+      const img = box.querySelector('img');
+      const btn = box.querySelector('.reject-btn');
+      applyState(panelFor(box), img, btn);
+    });
+  });
+</script>
+
 </body>
 </html>

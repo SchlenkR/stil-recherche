@@ -1,22 +1,86 @@
 # Stil-Recherche
 
-Zwei Sammlungen von Design-/Illustrationsstilen aus externen Trend-Artikeln, als Ideen-Fundus
-für neue Bildgenerierungen ("wir nehmen mal den und den Stil"). Gehostet über GitHub Pages,
-damit die Galerien jederzeit im Browser aufrufbar sind, ohne die Repo lokal zu klonen.
+Fundus an Illustrations-, Grafikdesign-, Webdesign- und Zeichenstilen aus verschiedenen
+Trend-Artikeln, als Ideen-Ausgangspunkt für neue Bildgenerierungen ("wir nehmen mal den und
+den Stil"). Eine einzige Seite, alle Bilder anklickbar, per GitHub Pages gehostet.
 
-- [stil-recherche-web/](stil-recherche-web/) - 187 Bilder aus 11 Webseiten, gruppiert nach
-  Quell-Webseite (Illustration, Grafikdesign, Webdesign, Logo/Branding, Typografie,
-  Verpackung, 3D-Art).
-- [stil-recherche-zeichenstile/](stil-recherche-zeichenstile/) - 62 Bilder, gruppiert nach
-  Zeichenstil statt nach Quelle (Illustrations-Grundstile, Cartoon-/Animationsstile,
-  Karikatur-Künstler, Karikatur-Genres).
+Übersicht zum Durchklicken: **[schlenkr.github.io/stil-recherche](https://schlenkr.github.io/stil-recherche/)**
+(oder lokal [index.html](index.html) im Browser öffnen).
 
-Beide Seiten: Klick auf ein Bild vergrößert es, ✕ markiert "nicht verwenden" (dauerhaft im
-Browser gemerkt), ←/→ blättert durch alle Bilder der Seite, Kopieren-Button in der Lightbox.
+Klick auf ein Bild vergrößert es, das kleine ✕ oben rechts markiert ein Bild als "nicht
+verwenden" (wird dann fast transparent, dauerhaft im Browser gemerkt), ←/→ blättert durch
+alle Bilder der ganzen Seite, Kopieren-Button in der Lightbox.
+
+## Aufbau
+
+Die ersten Abschnitte sind nach Quell-Webseite gruppiert (mehrere Quellen zeigen
+unterschiedliche Trends), die späteren Abschnitte nach Zeichenstil (weil viele Quellen
+dieselben Stile zeigen) - beide Prinzipien in einer Seite, je nachdem was für den jeweiligen
+Fund mehr Sinn ergab.
+
+### Nach Quell-Webseite (Design-/Illustrations-Trends, 187 Bilder)
+
+- [getillustrations.com - Emerging Illustration Styles to Watch in 2026](https://getillustrations.com/blog/emerging-illustration-styles-to-watch-in-2026/) - 16 Bilder, `images/gi-*`
+- [digitalsynopsis.com - Top 20 Graphic Design Trends For 2026](https://digitalsynopsis.com/design/graphic-design-trends-2026/) - 99 Bilder (alle 4-5 Beispiele je Trend), `images/ds-*`
+- [fireart.studio - Web Design Trends 2026](https://fireart.studio/blog/the-best-web-design-trends/) - 5 Bilder, `images/fa-*`
+- [digitalsynopsis.com - Top 10 Logo Design Trends For 2026](https://digitalsynopsis.com/design/logo-design-trends-2026/) - 10 Bilder, `images/lg-*`
+- [fontfabric.com - Top 10 Typography Trends for 2026](https://www.fontfabric.com/blog/top-typography-trends-for-2026/) - 10 Bilder, `images/ty-*`
+- [creativebloq.com - Messy, meaningful and made by humans](https://www.creativebloq.com/art/illustration/messy-meaningful-and-made-by-humans-the-biggest-illustration-trends-for-2026) - 5 Bilder, `images/cb-*`
+- [designerpeople.com - Top 11 Packaging Design Trends 2026](https://www.designerpeople.com/blog/packaging-design-trends-2026/) - 11 Bilder, `images/pk-*`
+- [littlerockprinting.com - 12 Graphic Design Trends (Print-Fokus)](https://littlerockprinting.com/graphic-design-trends-to-modernize-your-print-materials/) - 11 Bilder, `images/lp-*`
+- [kittl.com - 10 Graphic Design Trends 2026](https://www.kittl.com/blogs/graphic-design-trends-2026/) - 8 Bilder, `images/kt-*`
+- [Muzli Blog - Web Design Trends 2026](https://muz.li/blog/web-design-trends-2026/) - 6 Bilder, `images/mz-*`
+- [creativebloq.com - The critical 3D art trends that will impact 2026](https://www.creativebloq.com/3d/the-critical-3d-art-trends-that-will-impact-2026) - 6 Bilder, `images/c3-*`
+
+### Nach Zeichenstil (62 Bilder)
+
+- **Illustrations-Grundstile** (20 Bilder, `images/ic-*`) - aus [doncorgi.com](https://doncorgi.com/blog/illustration-styles/)
+  und [21-draw.com](https://www.21-draw.com/illustration-styles/): Flat Illustration, Line Art,
+  Cartoon, Minimalist, Fashion, Comics, Retro/Vintage, Typografie, Kinderbuch, Fantasy,
+  Buchillustration, Realismus, Concept Art, 3D-Illustration.
+- **Cartoon-/Animationsstile** (21 Bilder, `images/cs-*`) - aus [doncorgi.com - 25 Types Of
+  Cartoon Drawing Styles](https://doncorgi.com/blog/types-of-cartoon-drawing-styles/): jeder
+  Stil an einer konkreten Serie/einem Zeichner festgemacht (Manga, Anime, Chibi, Tim Burton,
+  Simpsons, Disney in drei Epochen, Peanuts, South Park, Dragon Ball, Adventure Time, Ghibli,
+  Crayon Shin-Chan, Lupin The 3rd, Betty Boop, Fist Of The North Star, Berserk, Calvin and
+  Hobbes, Powerpuff Girls, Archer).
+- **Karikatur-Künstler** (11 Bilder, `images/ka-*`) - aus [caricaturemaster.com](https://www.caricaturemaster.com/famous-caricaturists):
+  Al Hirschfeld, André Gill, Alexander Saroukhan, Boris Jefimow, Carlo Pellegrini, Emad &amp;
+  Osama Hajjaj, Isaac Cruikshank, Murray George Webb, Omaya Joha, Vitaly Peskov, Peggy Bacon.
+- **Karikatur-Genres/Techniken** (10 Bilder, `images/kg-*`) - aus [photolamus.com](https://www.photolamus.com/blog/types-caricature-styles-techniques):
+  Exaggerated, Social Satire, Digital, Portrait, Sculpture, Anime/Manga, Celebrity, Live,
+  Editorial, Cartoon Caricature.
+
+### Eigene KI-Generierung (5 Bilder, `images/hz-*`)
+
+**Hafenstadt-Entwürfe** - keine externe Quelle, sondern eigene Bildgenerierung (Higgsfield /
+nano_banana_pro, image-to-image) für das Barbara-Sailer-Website-Projekt. Ausgangspunkt war die
+Häuserszene im Vordergrund eines Magritte-Ölgemälde-Stil-Referenzbilds, als eigenständiges
+Motiv weitergebaut: Straße mit Häuserzeile, Kirche, Hafenmauer, Steg, Freilichtbühne mit
+Weinrot-Vorhang.
+
+## Bewusst ausgelassen
+
+- Alben-Cover-Trend-Artikel (z. B. premadepixels.com) - keine echten Beispielbilder eingebettet
+  (nur Text/Diagramme); Artikel mit kuratierten Listen echter Alben (z. B. indieground.net)
+  zeigen konkrete, leicht wiedererkennbare kommerzielle Cover-Kunst - urheberrechtlich heikler
+  als generische Stil-Beispielbilder, deshalb nicht heruntergeladen.
+- Pattern-/Textil-Trends (patternweaver.ai), UI/UX-Trends (orizon.co), Book-Cover-Trends
+  (damonza.com) - keine echten, den einzelnen Trends fest zugeordneten Beispielbilder.
+- skillshare.com (11 Cartoon Art Styles) - blockierte den Abruf (HTTP 403).
+- wajahatcaricatures.com (Top 10 Famous Caricature Artists) - Server nicht erreichbar.
+- pixune.com (40 Types of Cartoon Styles) - nur eingebettete YouTube-Videos, keine Standbilder.
+
+## Weitermachen
+
+Bilder nach Präfix in `images/` ablegen (z. B. `xy-01-stilname.ext`), dann eine neue
+`<section class="source">` in `index.html` ergänzen (Quellenlink + Karten mit Bild, Stilname,
+kurzer Beschreibung). Bei mehreren Beispielbildern für denselben Stilnamen: mehrere Karten mit
+"(Beispiel 2)"-Zusatz im Namen.
 
 ## Rechte
 
-Alle Bilder sind Beispielbilder aus den jeweils in den READMEs verlinkten Artikeln. Rechte an
-den einzelnen Bildern liegen bei den jeweiligen Urhebern/Publikationen bzw. Rechteinhabern der
-gezeigten Figuren/Marken. Diese Sammlung dient rein privaten Recherche-/Moodboard-Zwecken
+Rechte an den einzelnen Bildern liegen bei den jeweiligen Urhebern/Publikationen bzw.
+Rechteinhabern der gezeigten Figuren/Marken (Ausnahme: die Hafenstadt-Entwürfe sind eigene
+KI-Generierungen). Diese Sammlung dient rein privaten Recherche-/Moodboard-Zwecken
 (Ideenfindung für eigene Bildgenerierungen) und ist kein eigenständiges kreatives Werk.
