@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Stil-Recherche</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #f2f3f5;
+    --bg-card: #ffffff;
+    --text: #1a1d21;
+    --text-muted: #5b6270;
+    --border: #dcdfe4;
+    --accent: #8E2438;
+    --link: #22364A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181c;
+      --bg-card: #1f2227;
+      --text: #e8e9ea;
+      --text-muted: #9aa0aa;
+      --border: #33373f;
+      --accent: #d8637a;
+      --link: #7fa7d1;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 3rem 1.5rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.45;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 1.8rem;
+    margin: 0 0 0.5rem;
+  }
+  main > p {
+    color: var(--text-muted);
+    max-width: 65ch;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+  .cards a {
+    display: block;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .cards a:hover {
+    border-color: var(--accent);
+  }
+  .cards h2 {
+    margin: 0 0 0.4rem;
+    font-size: 1.15rem;
+  }
+  .cards p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  footer {
+    max-width: 900px;
+    margin: 2.5rem auto 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Stil-Recherche</h1>
+  <p>Zwei Sammlungen von Design-/Illustrationsstilen aus externen Trend-Artikeln, als
+  Ideen-Fundus für neue Bildgenerierungen.</p>
+
+  <div class="cards">
+    <a href="stil-recherche-web/">
+      <h2>Design-Trends nach Quelle</h2>
+      <p>187 Bilder aus 11 Webseiten - Illustration, Grafikdesign, Webdesign, Logo/Branding,
+      Typografie, Verpackung, 3D-Art. Gruppiert nach Quell-Webseite.</p>
+    </a>
+    <a href="stil-recherche-zeichenstile/">
+      <h2>Zeichenstile</h2>
+      <p>62 Bilder - Illustrations-Grundstile, Cartoon-/Animationsstile nach Figur/Serie,
+      Karikatur-Künstler und Karikatur-Genres. Gruppiert nach Stil statt nach Quelle.</p>
+    </a>
+  </div>
+</main>
+<footer>
+  <p>Reine private Recherche-/Moodboard-Sammlung. Rechte an den einzelnen Bildern liegen bei
+  den jeweiligen Urhebern/Publikationen.</p>
+</footer>
+</body>
+</html>

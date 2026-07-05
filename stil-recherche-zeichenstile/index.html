@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Zeichenstile - Übersicht</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #f2f3f5;
+    --bg-card: #ffffff;
+    --text: #1a1d21;
+    --text-muted: #5b6270;
+    --border: #dcdfe4;
+    --accent: #8E2438;
+    --link: #22364A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181c;
+      --bg-card: #1f2227;
+      --text: #e8e9ea;
+      --text-muted: #9aa0aa;
+      --border: #33373f;
+      --accent: #d8637a;
+      --link: #7fa7d1;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem 1.5rem 4rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.45;
+  }
+  header {
+    max-width: 1680px;
+    margin: 0 auto 2.5rem;
+  }
+  h1 {
+    font-size: 1.7rem;
+    margin: 0 0 0.4rem;
+  }
+  header p {
+    color: var(--text-muted);
+    max-width: 70ch;
+    margin: 0.3rem 0;
+  }
+  main {
+    max-width: 1680px;
+    margin: 0 auto;
+  }
+  section.source {
+    margin-bottom: 3rem;
+  }
+  section.source h2 {
+    font-size: 1.25rem;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.3rem;
+  }
+  section.source .source-meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+  }
+  section.source .source-meta a {
+    color: var(--link);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.1rem;
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .card .thumb {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .card .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+  }
+  .card .body {
+    padding: 0.8rem 0.9rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    flex: 1;
+  }
+  .card .style-name {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .card .desc {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    flex: 1;
+  }
+  .card .filename {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .trend-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+  .trend-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem 1.1rem;
+  }
+  .trend-block .style-name {
+    font-weight: 600;
+    font-size: 1.02rem;
+    margin-bottom: 0.3rem;
+  }
+  .trend-block .desc {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-bottom: 0.8rem;
+    max-width: 90ch;
+  }
+  .trend-thumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .trend-thumbs .t {
+    width: 150px;
+    aspect-ratio: 4 / 3;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--border);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .trend-thumbs .t img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+  }
+  footer {
+    max-width: 1680px;
+    margin: 2rem auto 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 11, 13, 0.82);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .lightbox.open {
+    display: flex;
+  }
+  .lightbox-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    max-width: min(1100px, 92vw);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .lightbox-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.6rem 0.7rem 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .lightbox-caption {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lightbox-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+  .lightbox-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.85rem;
+    border-radius: 7px;
+    padding: 0.4rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lightbox-btn:hover {
+    border-color: var(--accent);
+  }
+  .lightbox-btn.close {
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0.4rem 0.6rem;
+  }
+  .lightbox-image-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow: auto;
+    background: var(--bg);
+  }
+  .lightbox-image-wrap img {
+    max-width: 100%;
+    max-height: calc(90vh - 5.5rem);
+    object-fit: contain;
+    display: block;
+    border-radius: 4px;
+  }
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: none;
+    background: rgba(20, 21, 24, 0.55);
+    color: #fff;
+    font-size: 1.8rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  .lightbox-nav:hover {
+    background: var(--accent);
+  }
+  .lightbox-nav.prev {
+    left: 1rem;
+  }
+  .lightbox-nav.next {
+    right: 1rem;
+  }
+  .reject-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(15, 16, 18, 0.6);
+    color: #fff;
+    font-size: 0.75rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity 0.15s, background 0.15s;
+    z-index: 2;
+    padding: 0;
+  }
+  .thumb:hover .reject-btn,
+  .t:hover .reject-btn {
+    opacity: 0.95;
+  }
+  .reject-btn.active {
+    background: var(--accent);
+    opacity: 1;
+  }
+  .card.rejected .thumb img,
+  .t.rejected img {
+    opacity: 0.2;
+  }
+  .card.rejected .body {
+    opacity: 0.2;
+  }
+  .reject-summary {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 0.8rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .reject-summary button {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.82rem;
+    border-radius: 6px;
+    padding: 0.35rem 0.65rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .reject-summary button:hover {
+    border-color: var(--accent);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Zeichenstile</h1>
+  <p>Große Sammlung an Zeichen-/Illustrationsstilen - diesmal nach Stil gruppiert statt nach Quell-Webseite, weil viele Seiten dieselben Stile zeigen. Jede Karte nennt den Stilnamen, eine kurze Beschreibung und (wo relevant) die Quelle des jeweiligen Bildes. Gedacht als Fundus, um daraus neue Bilder in einem bestimmten Stil zu bauen.</p>
+  <div class="reject-summary">
+    <span id="rejectCount">0 Bilder aussortiert</span>
+    <button type="button" id="exportRejectedBtn">Liste exportieren</button>
+    <button type="button" id="resetRejectedBtn">Zurücksetzen</button>
+  </div>
+</header>
+
+<main>
+
+  <section class="source">
+    <h2>Illustrations-Grundstile</h2>
+    <p class="source-meta">Zusammengeführt aus <a href="https://doncorgi.com/blog/illustration-styles/" target="_blank" rel="noopener">doncorgi.com - "Ultimate Guide to Illustration Styles"</a> und <a href="https://www.21-draw.com/illustration-styles/" target="_blank" rel="noopener">21-draw.com - "The Definitive Guide to Illustration Styles"</a> - dieselben Grundstile, teils mit Beispielbildern aus beiden Quellen.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-01a-flat-illustration.jpg" alt="Flat Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Flat Illustration</div>
+          <div class="desc">Einfache, geometrische Formen und kräftige Flächenfarben statt Tiefe und Textur - reduziert und modern. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-01a-flat-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-01b-flat-illustration.jpg" alt="Flat Illustration Beispiel 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Flat Illustration (Beispiel 2)</div>
+          <div class="desc">Weiteres Beispiel derselben reduzierten, flächigen Bildsprache. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-01b-flat-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-02a-line-art.jpg" alt="Line Art" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Line Art</div>
+          <div class="desc">Betont die Form über Details - reduzierte Linien, kaum Hintergrund, oft ganz ohne Farbe. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-02a-line-art.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-02b-line-art.jpg" alt="Line Art Beispiel 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Line Art (Beispiel 2)</div>
+          <div class="desc">Weiteres Beispiel reiner Linienzeichnung ohne Farbfläche. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-02b-line-art.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-03a-cartoon-illustration.jpg" alt="Cartoon Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Cartoon Illustration</div>
+          <div class="desc">Einfache Formen mit spürbarer Übertreibung - kräftige Linien und meist kräftige Farben. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-03a-cartoon-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-03b-cartoon-illustration.jpg" alt="Cartoon Illustration Beispiel 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Cartoon Illustration (Beispiel 2)</div>
+          <div class="desc">Weiteres Beispiel derselben verspielt-übertriebenen Bildsprache. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-03b-cartoon-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-04-minimalist-illustration.jpg" alt="Minimalist Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Minimalist Illustration</div>
+          <div class="desc">Wenige Elemente, viel Weißraum - Klarheit und Ruhe statt Detailfülle. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-04-minimalist-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-05a-fashion-illustration.jpg" alt="Fashion Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Fashion Illustration</div>
+          <div class="desc">Zeigt Kleidung und Accessoires - Modedesigner nutzen sie, um ihre Kollektionen zu präsentieren. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-05a-fashion-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-05b-fashion-illustration.jpg" alt="Fashion Illustration Beispiel 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Fashion Illustration (Beispiel 2)</div>
+          <div class="desc">Weiteres Beispiel modischer Illustration mit elegant gestreckten Proportionen. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-05b-fashion-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-06a-comics-graphic-novels.jpg" alt="Comics" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Comics / Graphic Novels</div>
+          <div class="desc">Lebendige, comichafte Bildsprache mit fantasievollen Geschichten - Sequenz über Einzelbild. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-06a-comics-graphic-novels.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-06b-comics-graphic-novels.jpg" alt="Comics Beispiel 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Comics / Graphic Novels (Beispiel 2)</div>
+          <div class="desc">Weiteres Beispiel sequenzieller Comic-Illustration. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-06b-comics-graphic-novels.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-07a-retro-vintage.jpeg" alt="Retro Vintage" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Retro / Vintage Illustration</div>
+          <div class="desc">Greift Stile vergangener Jahrzehnte auf - alte Schriften, Muster und kräftige Linien für Nostalgie. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-07a-retro-vintage.jpeg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-07b-retro-vintage.jpg" alt="Retro Vintage Beispiel 2" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Retro / Vintage Illustration (Beispiel 2)</div>
+          <div class="desc">Weiteres Beispiel nostalgischer, vintage-anmutender Bildsprache. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-07b-retro-vintage.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-08-typography-illustration.jpg" alt="Typography Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Typografie-Illustration</div>
+          <div class="desc">Text und Schriftarten selbst werden zur Komposition - einprägsam durch mutige Buchstabenformen. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-08-typography-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-09-childrens-book-illustration.png" alt="Children&#x27;s Book Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Kinderbuch-Illustration</div>
+          <div class="desc">Bunt und vereinfacht, speziell für junge Leser gemacht. <em>(Quelle: doncorgi.com)</em></div>
+          <div class="filename">ic-09-childrens-book-illustration.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-10-fantasy-illustration.jpg" alt="Fantasy Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Fantasy-Illustration</div>
+          <div class="desc">Stimmungsvoll und verzaubernd - Mythologie, Magie, Fabelwesen und übernatürliche Szenen. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-10-fantasy-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-11-book-illustration.jpg" alt="Book Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Buchillustration</div>
+          <div class="desc">Bringt Geschichten durch Bilder zum Leben - hilft, den Text besser zu verstehen. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-11-book-illustration.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-12-realism.jpg" alt="Realism" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Realismus</div>
+          <div class="desc">Konzentriert sich auf die exakte Wiedergabe der realen Welt in Proportion, Textur und Licht. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-12-realism.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-13-concept-art.jpg" alt="Concept Art" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Concept Art</div>
+          <div class="desc">Hält die prägenden Eigenschaften eines Designs fest und legt den visuellen Stil eines Projekts fest. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-13-concept-art.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ic-14-3d-illustration.jpg" alt="3D Illustration" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">3D-Illustration</div>
+          <div class="desc">Erzeugt die Illusion von Tiefe und Volumen durch Licht, Schatten und Rendering-Techniken. <em>(Quelle: 21-draw.com)</em></div>
+          <div class="filename">ic-14-3d-illustration.jpg</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Cartoon-/Animationsstile (nach Figur/Serie)</h2>
+    <p class="source-meta">Quelle: <a href="https://doncorgi.com/blog/types-of-cartoon-drawing-styles/" target="_blank" rel="noopener">doncorgi.com - "25 Types Of Cartoon Drawing Styles With Examples"</a> - jeder Stil an einer konkreten, bekannten Serie/einem Zeichner festgemacht.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-01-classic-manga.jpg" alt="Classic Manga" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Classic Manga</div>
+          <div class="desc">Menschenähnliche Proportionen mit großen, ausdrucksstarken Augen - z. B. Sailor Moon, GTO.</div>
+          <div class="filename">cs-01-classic-manga.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-02-modern-anime.jpg" alt="Modern Anime" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Modern Anime</div>
+          <div class="desc">Komplexer und dynamischer, besonders in Bewegungsszenen - z. B. Fullmetal Alchemist, My Hero Academia.</div>
+          <div class="filename">cs-02-modern-anime.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-03-chibi.jpg" alt="Chibi" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Chibi</div>
+          <div class="desc">Super-deformiert: kleiner Körper, großer Kopf - niedlich und verspielt.</div>
+          <div class="filename">cs-03-chibi.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-04-tim-burton.jpg" alt="Tim Burton" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Tim Burton</div>
+          <div class="desc">Charakteristisch dunkel, aber voller Emotion - unverwechselbare, schlaksige Figuren.</div>
+          <div class="filename">cs-04-tim-burton.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-05-simpsons.jpg" alt="The Simpsons" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Die Simpsons</div>
+          <div class="desc">Gelbe Haut, große Augen - einer der bekanntesten Cartoon-Stile überhaupt.</div>
+          <div class="filename">cs-05-simpsons.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-06-classic-disney.jpg" alt="Classic Disney" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Classic Disney</div>
+          <div class="desc">Frühe Disney-Ära, z. B. Steamboat Willie - runde, simple Formen.</div>
+          <div class="filename">cs-06-classic-disney.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-07-mid-century-disney.jpg" alt="Mid Century Disney" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Disney (Mitte 20. Jh.)</div>
+          <div class="desc">Menschlicher wirkende Figuren, Arbeit mit Referenzaufnahmen von Schauspielern.</div>
+          <div class="filename">cs-07-mid-century-disney.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-08-modern-disney.jpg" alt="Modern Disney" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Modern Disney</div>
+          <div class="desc">Kräftige Farben, z. B. Lilo & Stitch - direkte Weiterentwicklung des Mid-Century-Stils.</div>
+          <div class="filename">cs-08-modern-disney.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-09-peanuts.jpg" alt="Peanuts" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Peanuts / Charlie Brown</div>
+          <div class="desc">Handgemacht und wackelig von Charles M. Schulz - vielfach kopiert, einzigartig.</div>
+          <div class="filename">cs-09-peanuts.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-10-south-park.jpg" alt="South Park" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">South Park</div>
+          <div class="desc">Sehr geometrisch, kaum Schatten oder Highlights - bewusst flach.</div>
+          <div class="filename">cs-10-south-park.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-11-dragon-ball-toriyama.jpg" alt="Dragon Ball" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Dragon Ball / Akira Toriyama</div>
+          <div class="desc">Stark definierte Muskulatur, sofort wiedererkennbar.</div>
+          <div class="filename">cs-11-dragon-ball-toriyama.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-12-adventure-time.jpg" alt="Adventure Time" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Adventure Time</div>
+          <div class="desc">Sehr geometrisch, die Figuren wirken fast „knochenlos“.</div>
+          <div class="filename">cs-12-adventure-time.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-13-miyazaki-ghibli.jpg" alt="Hayao Miyazaki Ghibli" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Hayao Miyazaki / Ghibli</div>
+          <div class="desc">Feine Linien, detailreich gebaute Figuren und Umgebungen - z. B. Chihiros Reise.</div>
+          <div class="filename">cs-13-miyazaki-ghibli.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-14-crayon-shinchan.jpg" alt="Crayon Shin-Chan" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Crayon Shin-Chan</div>
+          <div class="desc">Bewusst simpel, wie mit Wachsmalstiften gezeichnet.</div>
+          <div class="filename">cs-14-crayon-shinchan.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-15-lupin-the-3rd.jpg" alt="Lupin The 3rd" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Lupin The 3rd</div>
+          <div class="desc">Über Jahrzehnte gewachsener Stil mit interessanter Entwicklung.</div>
+          <div class="filename">cs-15-lupin-the-3rd.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-16-betty-boop.jpg" alt="Betty Boop" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Betty Boop</div>
+          <div class="desc">Starker Schwarz-Weiß-Kontrast, weltbekannt geworden.</div>
+          <div class="filename">cs-16-betty-boop.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-17-fist-of-the-north-star.jpg" alt="Fist Of The North Star" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Fist Of The North Star</div>
+          <div class="desc">Übermenschlich definierte Proportionen, sehr grungy im Original-Manga.</div>
+          <div class="filename">cs-17-fist-of-the-north-star.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-18-berserk.jpg" alt="Berserk" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Berserk</div>
+          <div class="desc">Sehr dunkel und extrem detailliert.</div>
+          <div class="filename">cs-18-berserk.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-19-calvin-and-hobbes.jpg" alt="Calvin and Hobbes" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Calvin and Hobbes</div>
+          <div class="desc">Bill Wattersons Mix aus dünnen und mittleren Linien - schlicht und einzigartig.</div>
+          <div class="filename">cs-19-calvin-and-hobbes.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-20-powerpuff-girls.jpg" alt="Powerpuff Girls" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Powerpuff Girls</div>
+          <div class="desc">Sehr geometrisch, dicke Linien, farbenfroh.</div>
+          <div class="filename">cs-20-powerpuff-girls.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/cs-21-archer.jpg" alt="Archer" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Archer</div>
+          <div class="desc">Mix aus Vektorgrafik und Realismus - ungewöhnlich realistische Proportionen für einen Cartoon-Stil.</div>
+          <div class="filename">cs-21-archer.jpg</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Karikatur-Künstler (historisch/international)</h2>
+    <p class="source-meta">Quelle: <a href="https://www.caricaturemaster.com/famous-caricaturists" target="_blank" rel="noopener">caricaturemaster.com - "11 Famous Caricaturists &amp; their Incredible Life Stories"</a> - Karikaturisten aus verschiedenen Ländern und Epochen, jeweils mit eigener Handschrift.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-01-al-hirschfeld.jpg" alt="Al Hirschfeld Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Al Hirschfeld</div>
+          <div class="desc">„Broadway's King of Caricature“ - elegante, fließende Schwarz-Weiß-Linienführung, berühmt für Theater- und Hollywood-Porträts.</div>
+          <div class="filename">ka-01-al-hirschfeld.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-02-andre-gill.jpg" alt="Andre Gill Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">André Gill</div>
+          <div class="desc">Französischer Karikaturist des 19. Jahrhunderts, bekannt für bissige politische Satire gegen Napoleon III.</div>
+          <div class="filename">ka-02-andre-gill.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-03-alexander-saroukhan.jpg" alt="Alexander Saroukhan Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Alexander Saroukhan</div>
+          <div class="desc">Ägyptisch-armenischer Karikaturist, dessen Zeichnungen den Zweiten Weltkrieg vorwegnahmen.</div>
+          <div class="filename">ka-03-alexander-saroukhan.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-04-boris-yefimov.jpg" alt="Boris Yefimov Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Boris Jefimowitsch Jefimow</div>
+          <div class="desc">Sowjetisch-russischer Karikaturist mit außergewöhnlich langer Karriere, politische Zeichnungen.</div>
+          <div class="filename">ka-04-boris-yefimov.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-05-carlo-pellegrini.jpg" alt="Carlo Pellegrini Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Carlo Pellegrini</div>
+          <div class="desc">Italienisch-britischer Karikaturist („Ape“) - elegante viktorianische Gesellschaftskarikaturen für Vanity Fair.</div>
+          <div class="filename">ka-05-carlo-pellegrini.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-06-hajjaj-brothers.jpg" alt="Emad and Osama Hajjaj Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Emad &amp; Osama Hajjaj</div>
+          <div class="desc">Jordanische Karikaturisten-Brüder, politische und gesellschaftliche Satire.</div>
+          <div class="filename">ka-06-hajjaj-brothers.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-07-isaac-cruikshank.jpg" alt="Isaac Cruikshank Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Isaac Cruikshank</div>
+          <div class="desc">Schottischer Karikaturist des 18. Jahrhunderts, satirische Radierungen.</div>
+          <div class="filename">ka-07-isaac-cruikshank.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-08-murray-george-webb.jpg" alt="Murray George Webb Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Murray George Webb</div>
+          <div class="desc">Neuseeländischer Karikaturist, Sport- und Politikkarikaturen.</div>
+          <div class="filename">ka-08-murray-george-webb.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-09-omaya-joha.jpg" alt="Omaya Joha Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Omaya Joha</div>
+          <div class="desc">Palästinensische Karikaturistin, eine der ersten Frauen im Fach, politische Satire.</div>
+          <div class="filename">ka-09-omaya-joha.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-10-vitaly-peskov.jpg" alt="Vitaly Peskov Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Vitaly Peskov</div>
+          <div class="desc">Russischer Karikaturist.</div>
+          <div class="filename">ka-10-vitaly-peskov.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/ka-11-peggy-bacon.jpg" alt="Peggy Bacon Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Margaret „Peggy“ Bacon</div>
+          <div class="desc">US-amerikanische Karikaturistin und Druckgrafikerin, satirische Porträts von Literaten und Künstlern.</div>
+          <div class="filename">ka-11-peggy-bacon.jpg</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="source">
+    <h2>Karikatur-Genres/Techniken</h2>
+    <p class="source-meta">Quelle: <a href="https://www.photolamus.com/blog/types-caricature-styles-techniques" target="_blank" rel="noopener">photolamus.com - "Dive into Caricatures: Exploring Portrait Styles and Techniques"</a> - Karikatur nach Einsatzzweck/Technik statt nach Künstler unterschieden.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-01-exaggerated.png" alt="Exaggerated Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Exaggerated</div>
+          <div class="desc">Die Grundform der Karikatur: markante Merkmale bewusst überzeichnet, ohne die Erkennbarkeit zu verlieren.</div>
+          <div class="filename">kg-01-exaggerated.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-02-social-satire.png" alt="Social Satire Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Social Satire</div>
+          <div class="desc">Gesellschaftskritik durch Übertreibung - Zustände statt Einzelpersonen im Fokus.</div>
+          <div class="filename">kg-02-social-satire.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-03-digital-caricature.png" alt="Digital Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Digital Caricature</div>
+          <div class="desc">Am Tablet oder mit Software erstellt - moderne Werkzeuge, klassisches Prinzip.</div>
+          <div class="filename">kg-03-digital-caricature.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-04-portrait-caricature.png" alt="Portrait Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Portrait Caricature</div>
+          <div class="desc">Nah am echten Porträt, mit dezenten, gezielten Übertreibungen einzelner Züge.</div>
+          <div class="filename">kg-04-portrait-caricature.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-05-caricature-sculpture.png" alt="Caricature Sculpture" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Caricature Sculpture</div>
+          <div class="desc">Dreidimensionale Karikatur - Übertreibung als Skulptur statt Zeichnung.</div>
+          <div class="filename">kg-05-caricature-sculpture.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-06-anime-manga-caricature.png" alt="Anime Manga Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Anime / Manga Caricature</div>
+          <div class="desc">Karikatur im Anime-/Manga-Look - große Augen, stilisierte Gesichtszüge.</div>
+          <div class="filename">kg-06-anime-manga-caricature.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-07-celebrity-caricature.png" alt="Celebrity Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Celebrity Caricature</div>
+          <div class="desc">Prominente als Zielscheibe - Wiedererkennbarkeit trotz starker Verzerrung entscheidend.</div>
+          <div class="filename">kg-07-celebrity-caricature.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-08-live-caricature.png" alt="Live Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Live Caricature</div>
+          <div class="desc">Schnelle Live-Zeichnung vor Ort, z. B. auf Jahrmärkten oder Events.</div>
+          <div class="filename">kg-08-live-caricature.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-09-editorial-caricature.png" alt="Editorial Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Editorial Caricature</div>
+          <div class="desc">Politische Karikatur für Zeitungen/Magazine - Kommentar zum Tagesgeschehen.</div>
+          <div class="filename">kg-09-editorial-caricature.png</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><img src="images/kg-10-cartoon-caricature.png" alt="Cartoon Caricature" loading="lazy"></div>
+        <div class="body">
+          <div class="style-name">Cartoon Caricature</div>
+          <div class="desc">Karikatur im Cartoon-Look - verspielter und weniger streng als die klassische Portrait-Karikatur.</div>
+          <div class="filename">kg-10-cartoon-caricature.png</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-nav prev" id="lightboxPrevBtn" type="button" aria-label="Vorheriges Bild">‹</button>
+  <button class="lightbox-nav next" id="lightboxNextBtn" type="button" aria-label="Nächstes Bild">›</button>
+  <div class="lightbox-panel">
+    <div class="lightbox-toolbar">
+      <span class="lightbox-caption" id="lightboxCaption"></span>
+      <div class="lightbox-actions">
+        <button class="lightbox-btn" id="lightboxRejectBtn" type="button">Nicht verwenden</button>
+        <button class="lightbox-btn" id="lightboxCopyBtn" type="button">Kopieren</button>
+        <button class="lightbox-btn close" id="lightboxCloseBtn" type="button" aria-label="Schließen">✕</button>
+      </div>
+    </div>
+    <div class="lightbox-image-wrap">
+      <img id="lightboxImg" src="" alt="">
+    </div>
+  </div>
+</div>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxCopyBtn = document.getElementById('lightboxCopyBtn');
+  const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+  const lightboxRejectBtn = document.getElementById('lightboxRejectBtn');
+  const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
+  const lightboxNextBtn = document.getElementById('lightboxNextBtn');
+  const rejectCountEl = document.getElementById('rejectCount');
+  const exportRejectedBtn = document.getElementById('exportRejectedBtn');
+  const resetRejectedBtn = document.getElementById('resetRejectedBtn');
+
+  // Merkt sich abgelehnte Bilder dauerhaft im Browser (localStorage) - kein
+  // Server/Backend nötig. Bleibt über Reloads und Browser-Neustarts erhalten,
+  // ist aber an dieses Browserprofil auf diesem Rechner gebunden.
+  const STORAGE_KEY = 'zeichenstile-2026-rejected';
+  let rejected = new Set();
+  try {
+    rejected = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
+  } catch (e) {
+    rejected = new Set();
+  }
+  // Flache Liste aller Bilder ueber alle Sektionen/Quellen hinweg, in
+  // DOM-Reihenfolge - erlaubt Pfeiltasten-Navigation quer durch die ganze
+  // Seite, nicht nur innerhalb einer Sektion.
+  const galleryItems = [];
+  let currentIndex = -1;
+  let currentImg = null;
+  let currentPanel = null;
+  let currentBtn = null;
+
+  function saveRejected() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...rejected]));
+    updateRejectCount();
+  }
+
+  function updateRejectCount() {
+    rejectCountEl.textContent = rejected.size + ' Bild' + (rejected.size === 1 ? '' : 'er') + ' aussortiert';
+  }
+
+  function imgKey(img) {
+    return img.getAttribute('src');
+  }
+
+  // "panel" ist die Einheit, die beim Ablehnen komplett auf 20% Deckkraft
+  // faedt: bei Einzelbild-Karten die ganze .card (Bild + Stilname + Text),
+  // bei den Trend-Mini-Galerien nur die einzelne Thumbnail-Box (.t), weil
+  // dort mehrere Bilder sich einen gemeinsamen Titel/Text teilen.
+  function panelFor(box) {
+    return box.closest('.card') || box;
+  }
+
+  function applyState(panel, img, btn) {
+    const isRejected = rejected.has(imgKey(img));
+    panel.classList.toggle('rejected', isRejected);
+    if (btn) {
+      btn.classList.toggle('active', isRejected);
+      btn.textContent = isRejected ? '↺' : '✕';
+      btn.title = isRejected ? 'Zurückholen' : 'Nicht verwenden (Panel auf 20% Deckkraft dimmen)';
+    }
+    return isRejected;
+  }
+
+  function toggleReject(panel, img, btn) {
+    const key = imgKey(img);
+    if (rejected.has(key)) {
+      rejected.delete(key);
+    } else {
+      rejected.add(key);
+    }
+    applyState(panel, img, btn);
+    saveRejected();
+    if (currentImg === img) {
+      const isR = rejected.has(key);
+      lightboxRejectBtn.textContent = isR ? 'Zurückholen' : 'Nicht verwenden';
+      lightboxRejectBtn.classList.toggle('active', isR);
+    }
+  }
+
+  // Reject-Buttons dynamisch in jede Thumbnail-Box einsetzen, statt jede
+  // Karte im HTML einzeln anzupassen.
+  document.querySelectorAll('.card .thumb, .trend-thumbs .t').forEach(box => {
+    const img = box.querySelector('img');
+    if (!img) return;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'reject-btn';
+    box.appendChild(btn);
+    const panel = panelFor(box);
+    applyState(panel, img, btn);
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleReject(panel, img, btn);
+    });
+    const index = galleryItems.length;
+    galleryItems.push({ img, panel, btn });
+    img.addEventListener('click', () => openLightboxAt(index));
+  });
+
+  updateRejectCount();
+
+  function openLightboxAt(index) {
+    currentIndex = (index + galleryItems.length) % galleryItems.length;
+    const item = galleryItems[currentIndex];
+    currentImg = item.img;
+    currentPanel = item.panel;
+    currentBtn = item.btn;
+    lightboxImg.src = currentImg.getAttribute('src');
+    const group = currentImg.closest('.card, .trend-block');
+    lightboxCaption.textContent = group ? group.querySelector('.style-name').textContent : currentImg.alt;
+    const isRejected = rejected.has(imgKey(currentImg));
+    lightboxRejectBtn.textContent = isRejected ? 'Zurückholen' : 'Nicht verwenden';
+    lightboxRejectBtn.classList.toggle('active', isRejected);
+    lightbox.classList.add('open');
+  }
+
+  function showRelative(delta) {
+    if (currentIndex === -1) return;
+    openLightboxAt(currentIndex + delta);
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightboxImg.src = '';
+    lightboxCopyBtn.textContent = 'Kopieren';
+    currentIndex = -1;
+    currentImg = null;
+    currentPanel = null;
+    currentBtn = null;
+  }
+
+  lightboxCloseBtn.addEventListener('click', closeLightbox);
+  lightboxPrevBtn.addEventListener('click', () => showRelative(-1));
+  lightboxNextBtn.addEventListener('click', () => showRelative(1));
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowRight') showRelative(1);
+    else if (e.key === 'ArrowLeft') showRelative(-1);
+  });
+
+  lightboxRejectBtn.addEventListener('click', () => {
+    if (!currentImg) return;
+    toggleReject(currentPanel, currentImg, currentBtn);
+  });
+
+  lightboxCopyBtn.addEventListener('click', async () => {
+    try {
+      const res = await fetch(lightboxImg.src);
+      const blob = await res.blob();
+      const bitmap = await createImageBitmap(blob);
+      const canvas = document.createElement('canvas');
+      canvas.width = bitmap.width;
+      canvas.height = bitmap.height;
+      canvas.getContext('2d').drawImage(bitmap, 0, 0);
+      const pngBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+      await navigator.clipboard.write([new ClipboardItem({ 'image/png': pngBlob })]);
+      lightboxCopyBtn.textContent = 'Kopiert!';
+      setTimeout(() => { lightboxCopyBtn.textContent = 'Kopieren'; }, 1500);
+    } catch (err) {
+      lightboxCopyBtn.textContent = 'Rechtsklick > Bild kopieren';
+      setTimeout(() => { lightboxCopyBtn.textContent = 'Kopieren'; }, 2500);
+    }
+  });
+
+  exportRejectedBtn.addEventListener('click', () => {
+    const list = [...rejected].sort();
+    const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'aussortiert.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  resetRejectedBtn.addEventListener('click', () => {
+    if (rejected.size === 0) return;
+    if (!confirm('Wirklich alle ' + rejected.size + ' Markierungen zurücksetzen?')) return;
+    rejected.clear();
+    saveRejected();
+    document.querySelectorAll('.card .thumb, .trend-thumbs .t').forEach(box => {
+      const img = box.querySelector('img');
+      const btn = box.querySelector('.reject-btn');
+      applyState(panelFor(box), img, btn);
+    });
+  });
+</script>
+
+</body>
+</html>
